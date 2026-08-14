@@ -1515,6 +1515,215 @@ img { display: block; max-width: 100%; }
   .deck-slide .reflection-prompt { font-size: 16px; }
 }
 
+/* Visual guide slide */
+.deck-slide-guide .visual-guide-slide {
+  min-height: min(74vh, 900px);
+  padding: 34px 38px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, rgba(22,63,49,.98), rgba(31,87,67,.94));
+  color: #fffaf2;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 28px 70px rgba(17, 31, 25, .14);
+}
+.visual-guide-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: start;
+}
+.visual-guide-hero h2 {
+  margin: 8px 0 8px;
+  font-size: clamp(32px, 3.7vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+.guide-subtitle {
+  margin: 0;
+  max-width: 760px;
+  color: rgba(255,250,242,.84);
+  font-size: 16px;
+  line-height: 1.65;
+}
+.guide-badge {
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #f7d9a5;
+  font-weight: 800;
+  min-width: 170px;
+  text-align: center;
+}
+.guide-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.guide-card {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.guide-card small {
+  display: block;
+  color: #f5ca88;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 10px;
+  font-weight: 800;
+}
+.guide-card h3 {
+  margin: 8px 0 12px;
+  font-size: 22px;
+  line-height: 1.2;
+}
+.guide-path {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.guide-path span,
+.guide-ref-list .quick-ref {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.10);
+  color: #fffaf2;
+  font-weight: 700;
+}
+.guide-path i {
+  color: #f5ca88;
+  font-style: normal;
+  font-weight: 900;
+}
+.guide-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+}
+.guide-list li,
+.guide-card p {
+  color: rgba(255,250,242,.88);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.guide-ref-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.guide-card-steps .guide-steps {
+  display: grid;
+  gap: 10px;
+}
+.guide-card-steps .guide-steps div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.08);
+}
+.guide-card-steps b {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #f5ca88;
+  color: #173f31;
+  font-size: 13px;
+}
+.guide-card-steps span {
+  font-size: 14px;
+  color: rgba(255,250,242,.88);
+}
+
+@media (max-width: 980px) {
+  .deck-slide-guide .visual-guide-slide { padding: 24px 20px; border-radius: 24px; }
+  .visual-guide-hero { flex-direction: column; }
+  .guide-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .guide-path { flex-direction: column; align-items: stretch; }
+  .guide-path i { display: none; }
+  .guide-ref-list .quick-ref { width: 100%; justify-content: center; }
+}
+
+/* Chart showcase slide */
+.deck-slide-charts .chart-showcase-slide {
+  min-height: min(74vh, 900px);
+  padding: 34px 38px;
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255,253,248,.98), rgba(247,242,233,.96));
+  border: 1px solid rgba(223,217,204,.95);
+  box-shadow: 0 28px 70px rgba(17, 31, 25, .08);
+}
+.chart-showcase-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+.chart-showcase-hero h2 {
+  margin: 8px 0 8px;
+  font-size: clamp(32px, 3.4vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -.03em;
+}
+.chart-showcase-grid {
+  display: grid;
+  gap: 18px;
+}
+.chart-showcase-card {
+  padding: 22px;
+  border-radius: 26px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(223,217,204,.92);
+  box-shadow: var(--shadow-sm);
+}
+.chart-showcase-head small {
+  display: block;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 10px;
+  font-weight: 800;
+}
+.chart-showcase-head h3 {
+  margin: 8px 0 14px;
+  font-size: 24px;
+}
+.chart-showcase-card .info-graphic {
+  margin-top: 0;
+}
+.chart-placeholder {
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(27,62,48,.06), rgba(212,183,124,.14));
+  border: 1px solid rgba(214,201,173,.75);
+}
+.chart-placeholder p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+@media (max-width: 980px) {
+  .deck-slide-charts .chart-showcase-slide { padding: 24px 20px; border-radius: 24px; }
+  .chart-showcase-hero { flex-direction: column; }
+}
+
 </style>
 </head>
 <body data-font="md">
@@ -1965,6 +2174,7 @@ let currentVersion = 'KJV';
 let currentReference = 'Acts 2:38';
 let recentRefs = safeJSON(STORAGE.recentRefs, []);
 let noteTimer = null;
+let currentSlideIndex = 0;
 
 function setFont(size) {
   const allowed = ['sm','md','lg'];
@@ -2073,6 +2283,52 @@ function compactBlocks(section) {
     if (block.type === 'key') return `<p><b>${escapeHTML(block.label)}:</b> ${escapeHTML(block.text)}</p>`;
     return `<p>${escapeHTML(block.text)}</p>`;
   }).join('');
+}
+
+
+function renderVisualGuide(lesson, transcript) {
+  const decor = lessonDecor[lesson.id] || {};
+  const sections = transcript.sections.filter(section => !META_TITLES.has(section.title) && section.title !== 'Visual Aids & Chart Content');
+  const highlights = sections.slice(0, 6).map(section => section.title);
+  const refs = allLessonRefs(lesson).slice(0, 4);
+  const objectiveItems = lesson.objectives.slice(0, 3);
+  return `<section class="visual-guide-slide">
+    <div class="visual-guide-hero">
+      <div>
+        <p class="eyebrow">VISUAL GUIDE</p>
+        <h2>${escapeHTML(lesson.title)}</h2>
+        <p class="guide-subtitle">A quick visual map so students can understand the lesson flow before reading every slide.</p>
+      </div>
+      <div class="guide-badge">${escapeHTML(decor.phrase || lesson.short)}</div>
+    </div>
+    <div class="guide-grid">
+      <article class="guide-card guide-card-flow">
+        <small>Lesson flow</small>
+        <h3>How this lesson moves</h3>
+        <div class="guide-path">${highlights.map(item => `<span>${escapeHTML(item)}</span>`).join('<i>→</i>')}</div>
+      </article>
+      <article class="guide-card">
+        <small>What to watch for</small>
+        <h3>Core takeaways</h3>
+        <ul class="guide-list">${objectiveItems.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
+      </article>
+      <article class="guide-card">
+        <small>Key Scriptures</small>
+        <h3>Open these quickly</h3>
+        <div class="guide-ref-list">${refs.map(ref => `<button class="quick-ref open-verse" data-ref="${escapeHTML(ref)}">${escapeHTML(ref)}</button>`).join('')}</div>
+      </article>
+      <article class="guide-card guide-card-steps">
+        <small>Study rhythm</small>
+        <h3>Simple student guide</h3>
+        <div class="guide-steps">
+          <div><b>1</b><span>Read the slide</span></div>
+          <div><b>2</b><span>Open the Scriptures</span></div>
+          <div><b>3</b><span>Check the visual chart</span></div>
+          <div><b>4</b><span>Reflect and apply</span></div>
+        </div>
+      </article>
+    </div>
+  </section>`;
 }
 
 function renderOverview(lesson, transcript) {
@@ -2437,14 +2693,40 @@ function renderSection(section, index, lesson) {
     </article>`;
 }
 
+
+function renderChartShowcase(lesson, transcript) {
+  const contentSections = transcript.sections.filter(section => !META_TITLES.has(section.title) && section.title !== 'Visual Aids & Chart Content');
+  const chartCards = [];
+  contentSections.forEach(section => {
+    const graphic = sectionGraphic(section, lesson);
+    if (graphic) {
+      chartCards.push(`<article class="chart-showcase-card"><div class="chart-showcase-head"><small>${escapeHTML(section.title)}</small><h3>${escapeHTML(section.title)}</h3></div>${graphic}</article>`);
+    }
+  });
+  if (!chartCards.length) {
+    chartCards.push(`<article class="chart-showcase-card"><div class="chart-showcase-head"><small>Overview</small><h3>Lesson chart</h3></div><div class="chart-placeholder"><p>This lesson is mostly reading-based, so the visual guide and section slides are the main study aids.</p></div></article>`);
+  }
+  return `<section class="chart-showcase-slide">
+    <div class="chart-showcase-hero">
+      <div>
+        <p class="eyebrow">VISUAL CHARTS</p>
+        <h2>${escapeHTML(lesson.title)}</h2>
+        <p class="guide-subtitle">This slide gathers the main charts and visual summaries from the lesson in one place.</p>
+      </div>
+      <div class="guide-badge">${chartCards.length} chart${chartCards.length === 1 ? '' : 's'}</div>
+    </div>
+    <div class="chart-showcase-grid">${chartCards.join('')}</div>
+  </section>`;
+}
+
 function renderTranscript(lesson, transcript) {
   const contentSections = transcript.sections.filter(section => !META_TITLES.has(section.title));
   const visibleNavSections = contentSections.filter(section => section.title !== 'Visual Aids & Chart Content');
 
-  els.sectionNav.innerHTML = visibleNavSections.map((section,index) => {
+  els.sectionNav.innerHTML = [`<button class="section-chip active" data-slide-index="0">Visual Guide</button>`, `<button class="section-chip" data-slide-index="1">Charts</button>`, ...visibleNavSections.map(section => {
     const originalIndex = contentSections.indexOf(section);
-    return `<button class="section-chip ${index===0?'active':''}" data-target="section-${slugify(section.title)}-${originalIndex}">${escapeHTML(section.title)}</button>`;
-  }).join('');
+    return `<button class="section-chip" data-target="section-${slugify(section.title)}-${originalIndex}">${escapeHTML(section.title)}</button>`;
+  })].join('');
 
   els.content.innerHTML = `
     <div class="transcript-toolbar presentation-topbar">
@@ -2458,14 +2740,17 @@ function renderTranscript(lesson, transcript) {
         </div>
       </div>
     </div>
-    <div class="transcript-status" id="transcriptStatus">${contentSections.length + 2} presentation slides in this lesson</div>
+    <div class="transcript-status" id="transcriptStatus">${contentSections.length + 4} presentation slides in this lesson</div>
     <div id="presentationDeck" class="presentation-deck">
+      <div class="deck-slide deck-slide-guide" data-search="visual guide ${escapeHTML(lesson.title.toLowerCase())}" data-slide-label="Visual Guide">${renderVisualGuide(lesson, transcript)}</div>
+      <div class="deck-slide deck-slide-charts" data-search="charts visuals ${escapeHTML(lesson.title.toLowerCase())}" data-slide-label="Charts">${renderChartShowcase(lesson, transcript)}</div>
       ${contentSections.map((section,index) => `<div class="deck-slide" data-search="${escapeHTML(sectionPlainText(section).toLowerCase())}" data-slide-label="${escapeHTML(section.title)}">${renderSection(section,index,lesson)}</div>`).join('')}
       <div class="deck-slide deck-slide-meta" data-search="quick review ${escapeHTML(lesson.quiz.q.toLowerCase())}" data-slide-label="Quick Review">${renderQuiz(lesson)}</div>
       <div class="deck-slide deck-slide-meta" data-search="reflection notes ${escapeHTML(lesson.reflection.toLowerCase())}" data-slide-label="Reflection">${renderReflection(lesson)}</div>
     </div>`;
 
   currentSlideIndex = 0;
+  els.sectionNav.querySelectorAll('[data-slide-index]').forEach(button => button.addEventListener('click', () => showSlide(Number(button.dataset.slideIndex))));
   els.sectionNav.querySelectorAll('[data-target]').forEach(button => button.addEventListener('click', () => {
     const slides = [...document.querySelectorAll('.deck-slide')];
     const targetIndex = slides.findIndex(slide => slide.querySelector(`#${button.dataset.target}`));
@@ -2508,7 +2793,9 @@ function showSlide(index) {
   const currentSection = current?.querySelector('.transcript-section');
   const activeId = currentSection?.id;
   els.sectionNav.querySelectorAll('.section-chip').forEach(button => {
-    button.classList.toggle('active', activeId ? button.dataset.target === activeId : false);
+    const slideIndex = button.dataset.slideIndex;
+    if (slideIndex !== undefined && slideIndex !== '') button.classList.toggle('active', Number(slideIndex) === currentSlideIndex);
+    else button.classList.toggle('active', activeId ? button.dataset.target === activeId : false);
   });
 }
 
