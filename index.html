@@ -3,424 +3,357 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f6f3ec" />
+  <meta name="theme-color" content="#0f3328" />
   <title>Unlocking the Bible | 12-Lesson Bible Study</title>
-  <meta name="description" content="A modern, elegant and easy-to-read 12-lesson Bible study experience." />
+  <meta name="description" content="A modern, clean and student-friendly 12-lesson Bible study." />
   <link rel="stylesheet" href="./styles.css" />
-
-  <!-- Index-only visual polish. No changes to app.js or lesson-pages.js are required. -->
   <style>
     :root {
-      --ux-cream: #f7f4ee;
-      --ux-paper: #fffdfa;
-      --ux-green: #173f32;
-      --ux-green-2: #245844;
-      --ux-green-soft: #edf4ef;
-      --ux-gold: #b38a4a;
-      --ux-gold-soft: #f7eddb;
-      --ux-text: #24302a;
-      --ux-muted: #6d756f;
-      --ux-line: #e4ded3;
-      --ux-shadow: 0 12px 34px rgba(37, 48, 41, .07);
+      --m-bg: #f6f7f3;
+      --m-surface: #ffffff;
+      --m-surface-2: #f0f3ed;
+      --m-ink: #16221d;
+      --m-muted: #68736d;
+      --m-line: #e1e6df;
+      --m-green: #0f3328;
+      --m-green-2: #1d5945;
+      --m-green-soft: #e8f1ec;
+      --m-gold: #c49854;
+      --m-gold-soft: #f8f0e2;
+      --m-radius: 18px;
+      --m-shadow: 0 12px 35px rgba(14, 38, 30, .07);
+      --m-sidebar: 280px;
+      --m-bible: 350px;
+      --m-sans: Inter, "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --m-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
     }
 
-    html { scroll-padding-top: 92px; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
     body {
-      background: var(--ux-cream) !important;
-      color: var(--ux-text) !important;
+      margin: 0 !important;
+      background:
+        radial-gradient(circle at 10% -10%, rgba(196,152,84,.10), transparent 28rem),
+        var(--m-bg) !important;
+      color: var(--m-ink) !important;
+      font-family: var(--m-sans) !important;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
+    button, input, textarea { font-family: var(--m-sans) !important; }
 
-    /* ---------- Header ---------- */
+    .app-shell {
+      min-height: 100vh !important;
+      display: grid !important;
+      grid-template-columns: var(--m-sidebar) minmax(0,1fr) var(--m-bible) !important;
+      grid-template-rows: 68px 1fr !important;
+      grid-template-areas: "top top top" "lessons main bible" !important;
+    }
+
+    /* ===== TOP BAR ===== */
     .topbar {
-      height: 72px !important;
-      padding: 0 22px !important;
-      border-bottom: 1px solid rgba(228, 222, 211, .9) !important;
-      background: rgba(255, 253, 250, .94) !important;
-      backdrop-filter: blur(18px) !important;
-      box-shadow: 0 2px 12px rgba(25, 43, 34, .035);
-    }
-    .brand-mark {
-      width: 38px !important;
-      height: 38px !important;
-      border-radius: 12px !important;
-      background: var(--ux-green) !important;
-      box-shadow: none !important;
-    }
-    .brand strong { font-size: 15px !important; }
-    .brand small { color: var(--ux-muted) !important; }
-    .top-chip {
-      background: var(--ux-green-soft) !important;
-      color: var(--ux-green) !important;
-      border: 0 !important;
-      padding: 8px 11px !important;
-    }
-    .primary-btn {
-      background: var(--ux-green) !important;
-      border-color: var(--ux-green) !important;
-      box-shadow: none !important;
-    }
-    .ghost-btn, .icon-btn {
-      background: #fff !important;
-      border-color: var(--ux-line) !important;
-    }
-
-    /* ---------- Left navigation ---------- */
-    .lesson-sidebar {
-      top: 72px !important;
-      height: calc(100vh - 72px) !important;
-      background: #f2eee6 !important;
-      border-right-color: var(--ux-line) !important;
-      padding: 20px 14px 26px !important;
-    }
-    .sidebar-head h2 { font-size: 23px !important; }
-    .sidebar-head p:not(.eyebrow) { font-size: 12px !important; }
-    .journey-card {
-      border-color: var(--ux-line) !important;
-      background: var(--ux-paper) !important;
-      box-shadow: none !important;
-    }
-    .search-box {
-      background: #fff !important;
-      border-color: var(--ux-line) !important;
-    }
-    .lesson-link {
-      border-radius: 12px !important;
-      padding: 9px !important;
-    }
-    .lesson-link.active {
-      background: var(--ux-green) !important;
-      color: #fff !important;
-      box-shadow: none !important;
-    }
-    .lesson-link.active .lesson-number {
-      background: rgba(255,255,255,.14) !important;
-      color: #fff !important;
-    }
-    .lesson-link.active span:last-child,
-    .lesson-link.active .lesson-done { color: rgba(255,255,255,.78) !important; }
-    .lesson-link.active .lesson-done { border-color: rgba(255,255,255,.22) !important; }
-
-    /* ---------- Main reading area ---------- */
-    .lesson-main {
-      padding: 28px clamp(20px, 3.7vw, 54px) 90px !important;
-      background: var(--ux-cream) !important;
-    }
-    .hero, .lesson-utility, .timeline-card, .content-wrap, .lesson-end {
-      max-width: 900px !important;
-    }
-
-    /* Calm, elegant hero */
-    .hero-card,
-    .premium-hero {
-      border-radius: 22px !important;
-      border: 1px solid #285441 !important;
-      background: linear-gradient(135deg, #163d30 0%, #23523f 100%) !important;
-      box-shadow: var(--ux-shadow) !important;
-      padding: 28px !important;
-      gap: 26px !important;
-    }
-    .hero h1 {
-      max-width: 720px;
-      margin-top: 12px !important;
-      font-size: clamp(36px, 4.7vw, 54px) !important;
-      line-height: 1.02 !important;
-      letter-spacing: -.035em !important;
-    }
-    .hero-summary {
-      max-width: 700px;
-      font-size: 16px !important;
-      line-height: 1.72 !important;
-      color: rgba(255,255,255,.82) !important;
-    }
-    .hero-pills { margin-top: 18px !important; }
-    .info-pill {
-      background: rgba(255,255,255,.09) !important;
-      border-color: rgba(255,255,255,.13) !important;
-      color: rgba(255,255,255,.8) !important;
-    }
-    .objective-card {
-      background: rgba(255,255,255,.08) !important;
-      border-color: rgba(255,255,255,.12) !important;
-      border-radius: 14px !important;
-    }
-    .objective-card p { color: rgba(255,255,255,.82) !important; }
-    .hero-art { min-height: 0 !important; }
-    .hero-graphic-card {
-      max-width: 260px !important;
-      margin: 0 !important;
-      border-radius: 18px !important;
-      padding: 7px !important;
-      background: rgba(255,255,255,.08) !important;
-      border-color: rgba(255,255,255,.12) !important;
-      box-shadow: none !important;
-    }
-    .hero-graphic { border-radius: 13px !important; }
-    .hero-note,
-    .premium-note {
-      max-width: 260px !important;
-      background: rgba(255,255,255,.08) !important;
-      border-color: rgba(255,255,255,.12) !important;
-      border-radius: 16px !important;
-      padding: 14px !important;
-    }
-    .hero-note h3 { font-size: 17px !important; }
-    .hero-note p, .hero-note li { font-size: 11.5px !important; line-height: 1.5 !important; }
-
-    /* Utilities: fewer visual boxes */
-    .lesson-utility { margin-top: 14px !important; }
-    .utility-grid,
-    .utility-grid-rich { gap: 10px !important; }
-    .utility-card {
-      border-color: var(--ux-line) !important;
-      background: var(--ux-paper) !important;
-      box-shadow: none !important;
-      border-radius: 15px !important;
-      padding: 14px !important;
-    }
-    .utility-card h3 { font-size: 13px !important; }
-    .utility-card p { font-size: 11.5px !important; }
-    .soft-btn {
-      border-radius: 10px !important;
-      background: #f4f1eb !important;
-      border-color: var(--ux-line) !important;
-    }
-    .source-search { border-color: var(--ux-line) !important; background: #fff !important; }
-
-    .timeline-card {
-      margin-top: 10px !important;
-      border-radius: 14px !important;
-      border-color: var(--ux-line) !important;
-      background: #fbf9f4 !important;
-      box-shadow: none !important;
-      padding: 13px !important;
-    }
-
-    /* ---------- Full lesson content ---------- */
-    .content-wrap { margin-top: 26px !important; }
-    .source-intro {
+      grid-area: top !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 90 !important;
+      height: 68px !important;
+      padding: 0 18px !important;
+      display: grid !important;
+      grid-template-columns: auto 1fr auto !important;
       align-items: center !important;
-      margin-bottom: 14px !important;
-      padding: 0 !important;
-    }
-    .source-intro h2 {
-      font-size: clamp(27px, 3vw, 34px) !important;
-      color: var(--ux-text) !important;
-    }
-    .source-intro p:not(.eyebrow) {
-      max-width: 680px !important;
-      font-size: 13px !important;
-      line-height: 1.7 !important;
-    }
-    .source-count { background: var(--ux-gold-soft) !important; }
-
-    /* Theme cards only once, not everywhere */
-    .creative-gallery {
-      grid-template-columns: 1fr 1fr !important;
-      margin-bottom: 18px !important;
-    }
-    .creative-gallery .creative-card-graphic { display: none !important; }
-    .creative-card {
-      border-color: var(--ux-line) !important;
-      border-radius: 15px !important;
-      background: var(--ux-paper) !important;
+      gap: 14px !important;
+      background: rgba(246,247,243,.88) !important;
+      backdrop-filter: blur(18px) saturate(1.25) !important;
+      border-bottom: 1px solid rgba(225,230,223,.92) !important;
       box-shadow: none !important;
-      padding: 15px !important;
     }
+    .topbar-left, .topbar-actions { display: flex !important; align-items: center !important; gap: 9px !important; }
+    .topbar-meta { display: flex !important; justify-content: center !important; gap: 8px !important; }
+    .brand { display: inline-flex !important; align-items: center !important; gap: 10px !important; text-decoration: none !important; }
+    .brand-mark {
+      width: 38px !important; height: 38px !important; border-radius: 13px !important;
+      display: grid !important; place-items: center !important;
+      background: linear-gradient(145deg, var(--m-green), var(--m-green-2)) !important;
+      color: #fff !important; font-size: 15px !important; font-weight: 800 !important;
+      box-shadow: 0 8px 20px rgba(15,51,40,.18) !important;
+    }
+    .brand strong { display:block !important; font-family:var(--m-sans)!important; font-size:14px!important; font-weight:800!important; letter-spacing:-.01em!important; }
+    .brand small { display:block !important; margin-top:1px!important; color:var(--m-muted)!important; font-size:10px!important; }
+    .top-chip {
+      display:inline-flex!important; align-items:center!important; padding:7px 10px!important;
+      border:1px solid var(--m-line)!important; border-radius:999px!important;
+      background:rgba(255,255,255,.72)!important; color:var(--m-muted)!important;
+      font-size:10px!important; font-weight:750!important; text-transform:none!important; letter-spacing:0!important;
+    }
+    .primary-btn,.ghost-btn,.icon-btn,.soft-btn,.mini-btn {
+      border-radius:11px!important; border:1px solid var(--m-line)!important; box-shadow:none!important;
+    }
+    .primary-btn { background:var(--m-green)!important; color:#fff!important; border-color:var(--m-green)!important; font-weight:750!important; }
+    .ghost-btn,.icon-btn { background:rgba(255,255,255,.82)!important; color:var(--m-ink)!important; }
+    .soft-btn,.mini-btn { background:#fff!important; color:var(--m-ink)!important; }
 
-    /* Page accordions */
+    /* ===== LEFT SIDEBAR ===== */
+    .lesson-sidebar {
+      grid-area: lessons !important;
+      position: sticky !important; top:68px!important; height:calc(100vh - 68px)!important;
+      overflow-y:auto!important; z-index:30!important;
+      padding:20px 13px 24px!important;
+      background:rgba(240,243,237,.72)!important;
+      border-right:1px solid var(--m-line)!important;
+    }
+    .sidebar-head { padding:0 7px 14px!important; }
+    .eyebrow { color:var(--m-gold)!important; font-size:9px!important; letter-spacing:.16em!important; font-weight:850!important; text-transform:uppercase!important; }
+    .sidebar-head h2 { margin:5px 0 7px!important; font-family:var(--m-sans)!important; font-size:22px!important; line-height:1.1!important; letter-spacing:-.03em!important; }
+    .sidebar-head p:not(.eyebrow) { color:var(--m-muted)!important; font-size:11.5px!important; line-height:1.55!important; }
+    .journey-card {
+      margin-bottom:12px!important; padding:14px!important; border:1px solid var(--m-line)!important;
+      border-radius:16px!important; background:rgba(255,255,255,.88)!important; box-shadow:none!important;
+    }
+    .journey-card h3 { font-family:var(--m-sans)!important; font-size:15px!important; letter-spacing:-.02em!important; }
+    .progress-bar { height:7px!important; background:#e5e9e3!important; }
+    .progress-bar span { background:linear-gradient(90deg,var(--m-green),#4a826d)!important; }
+    .search-box {
+      margin-bottom:12px!important; border:1px solid var(--m-line)!important; border-radius:13px!important;
+      background:#fff!important; box-shadow:0 5px 18px rgba(14,38,30,.035)!important;
+    }
+    .lesson-nav { gap:5px!important; }
+    .lesson-link {
+      grid-template-columns:32px minmax(0,1fr) 18px!important; gap:9px!important;
+      padding:9px!important; border-radius:12px!important; transition:.16s ease!important;
+    }
+    .lesson-link:hover { background:rgba(255,255,255,.70)!important; transform:translateX(2px); }
+    .lesson-link.active { background:var(--m-green)!important; color:#fff!important; box-shadow:0 8px 20px rgba(15,51,40,.14)!important; }
+    .lesson-number { width:30px!important; height:30px!important; border-radius:10px!important; background:var(--m-green-soft)!important; color:var(--m-green)!important; font-size:10px!important; }
+    .lesson-link.active .lesson-number { background:rgba(255,255,255,.12)!important; color:#fff!important; }
+    .lesson-link strong { font-size:11.7px!important; font-weight:750!important; }
+    .lesson-link span:last-child { font-size:9px!important; }
+    .lesson-link.active span:last-child { color:rgba(255,255,255,.70)!important; }
+
+    /* ===== MAIN ===== */
+    .lesson-main {
+      grid-area:main!important; min-width:0!important;
+      padding:28px clamp(18px,3.4vw,48px) 84px!important;
+      background:transparent!important;
+    }
+    .hero,.lesson-utility,.timeline-card,.content-wrap,.lesson-end { max-width:920px!important; margin-inline:auto!important; }
+
+    /* Modern hero — not brochure-like */
+    .hero-card,.premium-hero {
+      position:relative!important; overflow:hidden!important;
+      display:grid!important; grid-template-columns:minmax(0,1.4fr) minmax(230px,.6fr)!important;
+      gap:24px!important; padding:30px!important;
+      border:0!important; border-radius:24px!important;
+      background:
+        radial-gradient(circle at 92% 12%, rgba(196,152,84,.20), transparent 13rem),
+        linear-gradient(145deg,#0c2d23 0%,#174739 62%,#245848 100%)!important;
+      color:white!important; box-shadow:0 22px 50px rgba(15,51,40,.15)!important;
+    }
+    .hero-copy { align-self:center!important; }
+    .lesson-kicker { color:#d9bd8a!important; font-size:10px!important; font-weight:800!important; letter-spacing:.12em!important; }
+    .lesson-kicker::before { display:none!important; }
+    .hero h1 {
+      margin:11px 0 12px!important; max-width:690px!important;
+      font-family:var(--m-sans)!important; font-weight:820!important;
+      font-size:clamp(38px,4.6vw,56px)!important; line-height:.98!important; letter-spacing:-.055em!important;
+      color:#fff!important;
+    }
+    .hero-summary { max-width:700px!important; margin:0!important; color:rgba(255,255,255,.78)!important; font-size:15px!important; line-height:1.72!important; }
+    .hero-pills { margin-top:17px!important; gap:7px!important; }
+    .info-pill { padding:7px 10px!important; background:rgba(255,255,255,.08)!important; border:1px solid rgba(255,255,255,.10)!important; color:rgba(255,255,255,.72)!important; font-size:10px!important; }
+    .info-pill strong { color:#fff!important; }
+    .objective-grid { gap:9px!important; margin-top:18px!important; }
+    .objective-card { padding:12px 13px!important; border:1px solid rgba(255,255,255,.10)!important; border-radius:13px!important; background:rgba(255,255,255,.06)!important; }
+    .objective-card small { color:#d9bd8a!important; font-size:8px!important; }
+    .objective-card p { color:rgba(255,255,255,.78)!important; font-size:11.5px!important; line-height:1.55!important; }
+    .hero-art { align-content:center!important; justify-items:center!important; min-height:0!important; gap:10px!important; }
+    .hero-graphic-card { width:100%!important; max-width:248px!important; margin:0!important; padding:0!important; border:0!important; border-radius:18px!important; overflow:hidden!important; background:transparent!important; box-shadow:0 18px 35px rgba(0,0,0,.18)!important; }
+    .hero-graphic { width:100%!important; border-radius:18px!important; }
+    .hero-note,.premium-note { display:none!important; }
+
+    /* Utilities compact */
+    .lesson-utility { margin-top:12px!important; }
+    .utility-grid,.utility-grid-rich { grid-template-columns:1.25fr .75fr 1fr!important; gap:9px!important; }
+    .utility-card { padding:13px!important; border:1px solid var(--m-line)!important; border-radius:14px!important; background:rgba(255,255,255,.84)!important; box-shadow:none!important; }
+    .utility-card h3 { margin:0 0 4px!important; font-family:var(--m-sans)!important; font-size:12.5px!important; font-weight:780!important; }
+    .utility-card p { margin:0 0 9px!important; color:var(--m-muted)!important; font-size:10.8px!important; line-height:1.5!important; }
+    .source-search { border:1px solid var(--m-line)!important; border-radius:11px!important; background:#fff!important; }
+    .verse-chip { background:var(--m-green-soft)!important; border-color:transparent!important; color:var(--m-green)!important; }
+
+    .timeline-card { margin-top:10px!important; padding:12px!important; border:0!important; border-radius:13px!important; background:rgba(255,255,255,.58)!important; box-shadow:none!important; }
+    .timeline-step { background:#e8ece6!important; font-size:9.5px!important; }
+    .timeline-step.active { background:var(--m-green)!important; }
+
+    /* ===== READING CONTENT ===== */
+    .content-wrap { margin-top:28px!important; }
+    .source-intro { align-items:flex-end!important; gap:16px!important; margin:0 0 18px!important; padding:0 2px!important; }
+    .source-intro h2 { margin:5px 0 5px!important; font-family:var(--m-sans)!important; font-size:clamp(28px,3.2vw,38px)!important; line-height:1.04!important; letter-spacing:-.045em!important; color:var(--m-ink)!important; }
+    .source-intro p:not(.eyebrow) { max-width:660px!important; margin:0!important; color:var(--m-muted)!important; font-size:12.5px!important; line-height:1.65!important; }
+    .source-count { padding:8px 11px!important; border-radius:999px!important; background:var(--m-gold-soft)!important; color:#795a2f!important; font-size:10px!important; }
+
+    /* Remove brochure/gallery clutter */
+    .creative-gallery { display:none!important; }
+
+    /* Modern lesson-page accordion */
     .source-page {
-      margin-bottom: 10px !important;
-      border: 1px solid var(--ux-line) !important;
-      border-radius: 16px !important;
-      background: var(--ux-paper) !important;
-      box-shadow: none !important;
+      margin:0 0 10px!important; overflow:hidden!important;
+      border:1px solid var(--m-line)!important; border-radius:16px!important;
+      background:rgba(255,255,255,.94)!important; box-shadow:none!important;
     }
     .source-page summary {
-      min-height: 68px;
-      padding: 13px 16px !important;
-      grid-template-columns: 42px minmax(0,1fr) auto !important;
+      list-style:none!important; display:grid!important; grid-template-columns:40px minmax(0,1fr) 34px!important;
+      gap:11px!important; align-items:center!important; min-height:66px!important; padding:13px 15px!important;
+      cursor:pointer!important; transition:.16s ease!important;
     }
-    .source-page[open] summary {
-      background: #fbf8f2 !important;
-      border-bottom-color: var(--ux-line) !important;
-    }
+    .source-page summary:hover { background:#fafbf8!important; }
+    .source-page[open] summary { background:#f7f9f5!important; border-bottom:1px solid var(--m-line)!important; }
     .source-page-number {
-      width: 38px !important;
-      height: 38px !important;
-      border-radius: 11px !important;
-      background: var(--ux-green-soft) !important;
-      color: var(--ux-green) !important;
+      width:38px!important; height:38px!important; display:grid!important; place-items:center!important;
+      border-radius:11px!important; background:var(--m-green-soft)!important; color:var(--m-green)!important;
+      font-size:10px!important; font-weight:850!important;
     }
-    .source-page-summary strong { font-size: 17px !important; }
-    .source-page-summary small { font-size: 11px !important; }
+    .source-page-summary strong { display:block!important; font-family:var(--m-sans)!important; font-size:16px!important; line-height:1.24!important; font-weight:780!important; letter-spacing:-.015em!important; color:var(--m-ink)!important; }
+    .source-page-summary small { display:block!important; margin-top:3px!important; color:#87908a!important; font-size:9.8px!important; }
     .source-page-actions-hint {
-      font-size: 0 !important;
-      width: 30px;
-      height: 30px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      background: var(--ux-green-soft);
-      color: var(--ux-green) !important;
+      width:30px!important; height:30px!important; display:grid!important; place-items:center!important;
+      border-radius:999px!important; background:#f0f3ee!important; color:transparent!important; font-size:0!important;
     }
-    .source-page-actions-hint::after { content: "↓"; font-size: 12px; }
-    .source-page[open] .source-page-actions-hint::after { content: "↑"; }
+    .source-page-actions-hint::after { content:"+"; color:var(--m-green); font-size:18px; font-weight:400; line-height:1; }
+    .source-page[open] .source-page-actions-hint::after { content:"−"; }
 
-    .source-page-body {
-      padding: 22px clamp(18px, 4vw, 38px) 30px !important;
-      background: #fff !important;
-    }
+    .source-page-body { padding:0!important; background:#fff!important; }
     .source-page-toolbar {
-      padding-bottom: 12px;
-      margin-bottom: 20px !important;
-      border-bottom: 1px solid #efe9de;
+      margin:0!important; padding:12px 20px!important; border-bottom:1px solid #eef1ec!important;
+      color:#8a918d!important; font-size:9.5px!important; background:#fcfdfb!important;
     }
-    .source-text-label {
-      margin-bottom: 14px !important;
-      color: var(--ux-gold) !important;
-    }
+    .source-text-label { display:none!important; }
 
-    /* This is the key readability change */
-    .source-page-text {
-      max-width: 740px;
-      margin: 0 auto;
-      font-family: Georgia, "Times New Roman", serif !important;
-      color: #2b332f !important;
-      font-size: 16px !important;
-      line-height: 1.82 !important;
+    /* Clean article reading column */
+    .source-page-text,
+    .source-page-text.reader-ready {
+      max-width:760px!important; margin:0 auto!important; padding:30px 32px 34px!important;
+      white-space:normal!important; color:#27322d!important;
+      font-family:var(--m-sans)!important; font-size:16px!important; line-height:1.78!important;
+      letter-spacing:0!important;
     }
-    .source-block {
-      margin: 0 0 18px !important;
-      padding: 0 !important;
-      border: 0 !important;
-      border-radius: 0 !important;
-      background: transparent !important;
-      box-shadow: none !important;
+    .reader-block { margin:0; }
+    .reader-heading {
+      margin:34px 0 12px!important; font-family:var(--m-sans)!important;
+      font-size:24px!important; line-height:1.16!important; font-weight:820!important; letter-spacing:-.035em!important;
+      color:var(--m-ink)!important;
     }
-    .source-block.readable-heading {
-      margin-top: 26px !important;
-      margin-bottom: 10px !important;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 700;
-      font-size: 19px;
-      line-height: 1.35;
-      color: var(--ux-green);
+    .reader-heading:first-child { margin-top:0!important; }
+    .reader-subheading {
+      margin:26px 0 9px!important; font-family:var(--m-sans)!important;
+      font-size:14px!important; line-height:1.4!important; font-weight:800!important; color:var(--m-green)!important;
+      text-transform:none!important;
     }
-    .source-block.readable-key {
-      margin: 22px 0 !important;
-      padding: 14px 16px !important;
-      border-left: 3px solid var(--ux-gold) !important;
-      border-radius: 0 12px 12px 0 !important;
-      background: #fbf5e9 !important;
-      color: #5b4729 !important;
-      font-weight: 700;
+    .reader-paragraph {
+      margin:0 0 17px!important; font-family:var(--m-sans)!important;
+      font-size:16px!important; line-height:1.78!important; color:#35403a!important;
     }
-    .source-block.readable-scripture {
-      margin: 20px 0 !important;
-      padding: 15px 18px !important;
-      border: 1px solid #d8e4dc !important;
-      border-radius: 13px !important;
-      background: #f5f9f6 !important;
-      color: #304238 !important;
+    .reader-list { display:grid!important; gap:8px!important; margin:8px 0 22px!important; padding:0!important; }
+    .reader-list-row { display:grid!important; grid-template-columns:26px minmax(0,1fr)!important; gap:9px!important; align-items:start!important; font-size:15.5px!important; line-height:1.68!important; color:#35403a!important; }
+    .reader-marker { color:var(--m-green)!important; font-weight:820!important; text-align:right!important; }
+    .reader-list-row.is-bullet .reader-marker { color:var(--m-gold)!important; font-size:18px!important; }
+    .reader-scripture {
+      margin:20px 0 24px!important; padding:18px 19px!important;
+      border:1px solid #dbe5de!important; border-left:4px solid var(--m-green)!important;
+      border-radius:13px!important; background:#f5f8f5!important;
     }
-    .readable-scripture .scripture-ref {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--ux-green);
-      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .06em;
-      text-transform: uppercase;
+    .reader-scripture-ref { display:block!important; margin-bottom:7px!important; font-family:var(--m-sans)!important; color:var(--m-green)!important; font-size:10.5px!important; font-weight:850!important; letter-spacing:.04em!important; text-transform:uppercase!important; }
+    .reader-scripture-text { display:block!important; font-family:var(--m-serif)!important; color:#304039!important; font-size:16.5px!important; line-height:1.72!important; }
+    .reader-key {
+      margin:22px 0!important; padding:15px 16px!important; border:0!important; border-radius:13px!important;
+      background:var(--m-gold-soft)!important; color:#5d492b!important; font-size:14.5px!important; line-height:1.62!important; font-weight:760!important;
     }
-    .source-block.readable-note {
-      padding: 12px 14px !important;
-      border-radius: 11px !important;
-      background: #f6f3ed !important;
-      color: #666d68 !important;
-      font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
-      font-size: 12px !important;
-      line-height: 1.65 !important;
-    }
-    .source-page-text ul,
-    .source-page-text ol {
-      margin: 10px 0 20px 22px;
-      padding: 0;
-    }
-    .source-page-text li { margin: 7px 0; padding-left: 4px; }
+    .reader-note { margin:14px 0 18px!important; padding:12px 14px!important; border-radius:11px!important; background:#f3f5f2!important; color:#6d756f!important; font-size:11.5px!important; line-height:1.6!important; }
+    .reader-source { margin:10px 0 16px!important; padding-left:12px!important; border-left:2px solid #e3e6e1!important; color:#858c87!important; font-size:10.5px!important; line-height:1.55!important; }
 
-    /* Quiz + reflection */
-    .section-card {
-      border-color: var(--ux-line) !important;
-      border-radius: 16px !important;
-      box-shadow: none !important;
-      background: var(--ux-paper) !important;
-    }
-    .notes-card {
-      border-radius: 18px !important;
-      background: var(--ux-green) !important;
-      box-shadow: none !important;
-    }
+    /* Quiz/reflection modern */
+    .section-card { border:1px solid var(--m-line)!important; border-radius:16px!important; background:#fff!important; box-shadow:none!important; }
+    .section-toggle { padding:16px 18px!important; }
+    .section-copy h2 { font-family:var(--m-sans)!important; font-size:18px!important; font-weight:800!important; letter-spacing:-.02em!important; }
+    .check-card { border:0!important; background:var(--m-surface-2)!important; }
+    .quiz-option { border:1px solid var(--m-line)!important; border-radius:11px!important; background:#fff!important; }
+    .notes-card { margin-top:14px!important; border-radius:18px!important; background:linear-gradient(145deg,#0f3328,#1a4a3a)!important; box-shadow:0 16px 38px rgba(15,51,40,.12)!important; }
+    .notes-card h2 { font-family:var(--m-sans)!important; font-size:20px!important; letter-spacing:-.02em!important; }
 
-    /* ---------- Bible panel ---------- */
+    .lesson-end { margin-top:18px!important; }
+    .nav-card { border:1px solid var(--m-line)!important; border-radius:14px!important; background:#fff!important; box-shadow:none!important; }
+
+    /* ===== BIBLE PANEL ===== */
     .bible-panel {
-      top: 72px !important;
-      height: calc(100vh - 72px) !important;
-      border-left-color: var(--ux-line) !important;
-      background: #fff !important;
+      grid-area:bible!important; position:sticky!important; top:68px!important; height:calc(100vh - 68px)!important;
+      display:flex!important; flex-direction:column!important; overflow:hidden!important;
+      background:rgba(255,255,255,.96)!important; border-left:1px solid var(--m-line)!important; z-index:35!important;
     }
-    .bible-search { border-color: var(--ux-line) !important; background: #fbfaf7 !important; }
-    .translation-tabs button { border-radius: 9px !important; }
-    .translation-tabs button.active { background: var(--ux-green) !important; }
+    .bible-head { padding:18px 16px 11px!important; }
+    .bible-head h2 { font-family:var(--m-sans)!important; font-size:19px!important; font-weight:800!important; letter-spacing:-.02em!important; }
+    .bible-search { margin:0 14px 10px!important; border:1px solid var(--m-line)!important; border-radius:12px!important; background:#f8faf7!important; }
+    .translation-tabs { padding:0 14px 10px!important; }
+    .translation-tabs button { border-radius:9px!important; background:#f1f4ef!important; border-color:transparent!important; }
+    .translation-tabs button.active { background:var(--m-green)!important; color:#fff!important; }
+    .verse-header h3 { font-family:var(--m-sans)!important; }
+    .verse-content { font-family:var(--m-serif)!important; }
 
-    /* Back to top helper */
     #uxBackTop {
-      position: fixed;
-      right: 390px;
-      bottom: 24px;
-      z-index: 45;
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--ux-line);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--ux-green);
-      box-shadow: var(--ux-shadow);
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: .2s ease;
+      position:fixed; right:calc(var(--m-bible) + 22px); bottom:22px; z-index:50;
+      width:42px; height:42px; border:1px solid var(--m-line); border-radius:999px;
+      background:#fff; color:var(--m-green); box-shadow:var(--m-shadow);
+      opacity:0; transform:translateY(8px); pointer-events:none; transition:.2s ease;
     }
-    #uxBackTop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #uxBackTop.show { opacity:1; transform:none; pointer-events:auto; }
 
-    @media (max-width: 1220px) {
-      #uxBackTop { right: 350px; }
+    .focus .lesson-sidebar,.focus .bible-panel { display:none!important; }
+    .focus { grid-template-columns:minmax(0,1fr)!important; grid-template-areas:"top" "main"!important; }
+
+    @media (max-width:1180px) {
+      :root { --m-sidebar:250px; --m-bible:320px; }
+      .utility-grid,.utility-grid-rich { grid-template-columns:1fr 1fr!important; }
+      .utility-card-wide { grid-column:1/-1!important; }
     }
 
-    @media (max-width: 980px) {
-      .topbar { height: 72px !important; }
-      .lesson-sidebar, .bible-panel { top: 72px !important; }
-      .hero-card, .premium-hero { grid-template-columns: 1fr !important; padding: 22px !important; }
-      .hero-art { display: none !important; }
-      .creative-gallery { grid-template-columns: 1fr !important; }
-      .source-page-body { padding: 20px 18px 26px !important; }
-      .source-page-text { font-size: 15.5px !important; line-height: 1.78 !important; }
-      #uxBackTop { right: 18px; bottom: 82px; }
+    @media (max-width:980px) {
+      .app-shell { display:block!important; padding-top:68px!important; }
+      .topbar { position:fixed!important; left:0!important; right:0!important; }
+      .mobile-only { display:inline-grid!important; place-items:center!important; }
+      .lesson-sidebar,.bible-panel {
+        position:fixed!important; top:68px!important; bottom:0!important; height:auto!important; width:min(90vw,370px)!important;
+        z-index:75!important; transition:transform .22s ease!important; box-shadow:0 24px 60px rgba(14,38,30,.22)!important;
+      }
+      .lesson-sidebar { left:0!important; transform:translateX(-105%)!important; }
+      .lesson-sidebar.open { transform:none!important; }
+      .bible-panel { right:0!important; left:auto!important; transform:translateX(105%)!important; }
+      .bible-panel.open { transform:none!important; }
+      .scrim.show { display:block!important; z-index:70!important; }
+      .lesson-main { padding:20px 14px 70px!important; }
+      .hero-card,.premium-hero { grid-template-columns:1fr!important; padding:24px 21px!important; }
+      .hero-art { display:none!important; }
+      .objective-grid { grid-template-columns:1fr!important; }
+      .utility-grid,.utility-grid-rich { grid-template-columns:1fr!important; }
+      .utility-card-wide { grid-column:auto!important; }
+      #uxBackTop { right:16px; bottom:80px; }
+      .topbar-meta { display:none!important; }
     }
 
-    @media (max-width: 560px) {
-      .lesson-main { padding: 18px 12px 72px !important; }
-      .hero-card, .premium-hero { border-radius: 18px !important; padding: 20px 17px !important; }
-      .hero h1 { font-size: 37px !important; }
-      .objective-grid { grid-template-columns: 1fr !important; }
-      .source-intro { align-items: flex-start !important; }
-      .source-count { margin-top: 4px; }
-      .source-page summary { padding: 12px !important; grid-template-columns: 38px minmax(0,1fr) 28px !important; }
-      .source-page-summary small { white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-      .source-page-body { padding: 18px 15px 24px !important; }
-      .source-page-text { font-size: 15.5px !important; line-height: 1.76 !important; }
+    @media (max-width:560px) {
+      .brand small,.hide-sm,.font-controls { display:none!important; }
+      .topbar { padding:0 10px!important; }
+      .brand strong { font-size:13px!important; }
+      .hero h1 { font-size:39px!important; line-height:1!important; }
+      .hero-summary { font-size:14px!important; }
+      .source-intro { align-items:flex-start!important; }
+      .source-intro h2 { font-size:30px!important; }
+      .source-count { margin-top:4px!important; }
+      .source-page summary { grid-template-columns:36px minmax(0,1fr) 30px!important; padding:12px!important; }
+      .source-page-number { width:34px!important; height:34px!important; }
+      .source-page-summary strong { font-size:15px!important; }
+      .source-page-text,.source-page-text.reader-ready { padding:24px 17px 28px!important; font-size:15px!important; line-height:1.72!important; }
+      .reader-heading { font-size:21px!important; margin-top:28px!important; }
+      .reader-paragraph { font-size:15px!important; line-height:1.72!important; }
+      .reader-list-row { grid-template-columns:22px minmax(0,1fr)!important; font-size:14.5px!important; }
+      .reader-scripture { padding:15px!important; }
+      .reader-scripture-text { font-size:15.5px!important; }
     }
   </style>
 </head>
@@ -431,18 +364,13 @@
         <button class="icon-btn mobile-only" id="lessonMenuBtn" aria-label="Open lesson menu">☰</button>
         <a class="brand" href="#" id="brandHome" aria-label="Unlocking the Bible home">
           <span class="brand-mark">U</span>
-          <span>
-            <strong>Unlocking the Bible</strong>
-            <small>Read · Understand · Apply</small>
-          </span>
+          <span><strong>Unlocking the Bible</strong><small>Read · Understand · Apply</small></span>
         </a>
       </div>
-
       <div class="topbar-meta">
         <span class="top-chip" id="progressChip">0 / 12 completed</span>
         <span class="top-chip hide-sm" id="currentChip">Lesson 1</span>
       </div>
-
       <div class="topbar-actions">
         <div class="font-controls" aria-label="Reading size controls">
           <button class="icon-btn" id="fontDecreaseBtn" title="Decrease text size">A−</button>
@@ -457,22 +385,12 @@
       <div class="sidebar-head">
         <p class="eyebrow">YOUR STUDY JOURNEY</p>
         <h2>12 Bible Lessons</h2>
-        <p>Choose a lesson, read at your own pace, open Scriptures beside the lesson, and save personal reflections.</p>
+        <p>Study at your own pace. Open Scripture beside the lesson and save your reflections as you go.</p>
       </div>
-
       <section class="journey-card" id="journeyCard"></section>
-
-      <label class="search-box">
-        <span>⌕</span>
-        <input id="lessonSearch" type="search" placeholder="Find a lesson..." autocomplete="off" />
-      </label>
-
+      <label class="search-box"><span>⌕</span><input id="lessonSearch" type="search" placeholder="Find a lesson..." autocomplete="off" /></label>
       <nav id="lessonNav" class="lesson-nav"></nav>
-
-      <div class="sidebar-footer">
-        <span>Student study experience</span>
-        <small>Your progress and notes stay in this browser.</small>
-      </div>
+      <div class="sidebar-footer"><span>Student study experience</span><small>Progress and notes stay in this browser.</small></div>
     </aside>
 
     <main class="lesson-main" id="lessonMain">
@@ -485,179 +403,369 @@
 
     <aside class="bible-panel" id="biblePanel" aria-label="Bible quick reference">
       <div class="bible-head">
-        <div>
-          <p class="eyebrow">SCRIPTURE REFERENCE</p>
-          <h2>📖 Bible</h2>
-        </div>
+        <div><p class="eyebrow">SCRIPTURE REFERENCE</p><h2>📖 Bible</h2></div>
         <button class="icon-btn mobile-only" id="bibleCloseBtn" aria-label="Close Bible">✕</button>
       </div>
-
       <form class="bible-search" id="bibleSearchForm">
         <input id="bibleSearchInput" placeholder="Acts 2:38 or search a word" aria-label="Bible passage or keyword" />
         <button type="submit" class="icon-btn" aria-label="Search Bible">→</button>
       </form>
-
       <div class="translation-tabs" id="translationTabs" role="tablist" aria-label="Bible translation">
-        <button data-version="KJV" class="active">KJV</button>
-        <button data-version="NIV">NIV</button>
-        <button data-version="NLT">NLT</button>
-        <button data-version="TAGALOG">Tagalog</button>
+        <button data-version="KJV" class="active">KJV</button><button data-version="NIV">NIV</button><button data-version="NLT">NLT</button><button data-version="TAGALOG">Tagalog</button>
       </div>
-
       <div class="quick-refs" id="recentRefs"></div>
-
       <div class="bible-view" id="bibleView">
-        <div class="bible-empty">
-          <span class="bible-icon">📖</span>
-          <h3>Scripture stays beside your lesson</h3>
-          <p>Click a Scripture reference while studying and it will open here without leaving the lesson.</p>
-          <button class="text-link" id="demoVerseBtn">Open Acts 2:38</button>
-        </div>
+        <div class="bible-empty"><span class="bible-icon">📖</span><h3>Keep Scripture beside the lesson</h3><p>Click any Bible reference while studying and it opens here without taking you away from the lesson.</p><button class="text-link" id="demoVerseBtn">Open Acts 2:38</button></div>
       </div>
-
-      <div class="bible-status" id="bibleStatus">
-        <span class="status-dot"></span>
-        <span>Bible service ready when API is configured</span>
-      </div>
+      <div class="bible-status" id="bibleStatus"><span class="status-dot"></span><span>Bible service ready when API is configured</span></div>
     </aside>
-
     <div class="scrim" id="scrim"></div>
   </div>
 
   <button id="uxBackTop" type="button" aria-label="Back to top" title="Back to top">↑</button>
-
   <script src="./lesson-pages.js"></script>
   <script src="./app.js"></script>
-
-  <!-- Index-only readability enhancer: repairs PDF line-wraps after app.js renders. -->
+  <!-- Index-only content formatter: rebuilds PDF-extracted text into clean paragraphs, lists and Scripture blocks. -->
   <script>
     (() => {
-      const scripturePattern = /^(?:[1-3]\s*)?[A-Za-z][A-Za-z .’'\-]+\s+\d{1,3}:\d{1,3}(?:[-–]\d{1,3})?\s*$/;
-      const notePattern = /^(?:\[?Note to Teacher|Teacher[’']?s Notes|Student[’']?s Notes|Source:|©\s*\d{4})/i;
-      const keyPattern = /^Key\s*#?\d*\s*:/i;
-      const headingPattern = /^(?:[A-Z]|[IVX]+\.|[A-Z]\.|\d+\.)?\s*[A-Z][A-Z0-9 ,:&’'\-()]{4,}$/;
-      const bulletPattern = /^(?:[•●▪◦]|[-–—]|\d+[.)]|[A-Za-z][.)])\s+/;
+      const scriptureRef = /^(?:[1-3]\s*)?[A-Za-z][A-Za-z .’'\-]+\s+\d{1,3}:\d{1,3}(?:\s*[-–]\s*\d{1,3})?$/;
+      const allCapsHeading = /^[A-Z0-9][A-Z0-9 ,:&()’'\-\/]{3,}$/;
+      const romanHeading = /^([IVXLCDM]+)\.\s+(.+)$/;
+      const listStart = /^([•●▪◦]|\d+[.)]|[A-H][.)])\s*(.*)$/;
+      const standaloneMarker = /^([•●▪◦]|\d+[.)]|[A-H][.)])$/;
+      const keyStart = /^Key\s*#?\d*\s*:/i;
+      const noteStart = /^(?:\[?Note to Teacher|Teacher[’']?s Notes|Student[’']?s Notes)/i;
+      const sourceStart = /^(?:Source:|Sources:|Reference:|References:|©\s*\d{4})/i;
+      const chartStart = /^(?:Refer to Chart|Refer to chart|Chart\s+)/;
+      const strongHeadings = new Set([
+        'Guidelines', 'Lesson Objectives', 'Lesson Outline', 'Primary Objective', 'Secondary Objectives',
+        'Summary of Lesson', 'Reflection Questions', 'How do I use the Bible?', 'Charts',
+        'The Lake of Fire', 'A new heaven and earth', 'Eternity'
+      ]);
 
-      function htmlLines(block) {
-        const clone = block.cloneNode(true);
-        clone.querySelectorAll('br').forEach(br => br.replaceWith('\n'));
-        return clone.textContent
-          .split('\n')
-          .map(line => line.replace(/\s+/g, ' ').trim())
-          .filter(Boolean);
-      }
-
-      function joinWrappedLines(lines) {
+      const cleanLine = line => line.replace(/\u00a0/g, ' ').replace(/[ \t]+/g, ' ').trim();
+      const dehyphenJoin = lines => {
         let out = '';
-        lines.forEach(line => {
-          if (!out) { out = line; return; }
+        for (const raw of lines) {
+          const line = cleanLine(raw);
+          if (!line) continue;
+          if (!out) { out = line; continue; }
           if (/\-$/.test(out) && /^[a-z]/.test(line)) out = out.slice(0, -1) + line;
           else out += ' ' + line;
-        });
+        }
         return out.replace(/\s+([,.;:!?])/g, '$1').replace(/\s{2,}/g, ' ').trim();
+      };
+
+      function isNoise(line, lessonId, pageNum) {
+        if (!line) return false;
+        if (line === `Lesson ${lessonId}`) return true;
+        if (line === String(pageNum)) return true;
+        if (/^[A-H]$/.test(line)) return true; // PDF section marker repeated beside the real heading.
+        return false;
       }
 
-      function makeList(lines) {
-        const list = document.createElement('ul');
-        lines.forEach(line => {
-          const li = document.createElement('li');
-          li.textContent = line.replace(bulletPattern, '').trim();
-          list.appendChild(li);
-        });
-        return list;
+      function isHeading(line) {
+        if (!line || scriptureRef.test(line)) return false;
+        if (strongHeadings.has(line)) return true;
+        if (romanHeading.test(line)) return true;
+        if (allCapsHeading.test(line) && line.length <= 90 && line.split(/\s+/).length <= 12) return true;
+        return false;
       }
 
-      function beautifyBlock(block) {
-        if (block.dataset.uxCleaned === '1') return;
-        block.dataset.uxCleaned = '1';
-
-        const lines = htmlLines(block);
-        if (!lines.length) return;
-
-        // Hide the duplicated lone page number visually, but keep it in the DOM/source.
-        if (lines.length === 1 && /^\d{1,3}$/.test(lines[0])) {
-          block.classList.add('readable-note');
-          block.style.opacity = '.45';
-          block.style.fontSize = '10px';
-          block.textContent = `Page ${lines[0]}`;
-          return;
-        }
-
-        if (lines.length === 1 && keyPattern.test(lines[0])) {
-          block.classList.add('readable-key');
-          block.textContent = lines[0];
-          return;
-        }
-
-        if (lines.length === 1 && notePattern.test(lines[0])) {
-          block.classList.add('readable-note');
-          block.textContent = lines[0];
-          return;
-        }
-
-        // Scripture reference on first line + verse text below.
-        if (scripturePattern.test(lines[0]) && lines.length > 1) {
-          block.classList.add('readable-scripture');
-          block.innerHTML = '';
-          const ref = document.createElement('span');
-          ref.className = 'scripture-ref';
-          ref.textContent = lines[0];
-          const verse = document.createElement('span');
-          verse.textContent = joinWrappedLines(lines.slice(1));
-          block.append(ref, verse);
-          return;
-        }
-
-        // Lists: keep them scannable instead of joining them into one sentence.
-        const bulletLines = lines.filter(line => bulletPattern.test(line));
-        if (bulletLines.length >= 2 && bulletLines.length >= Math.ceil(lines.length * .6)) {
-          block.innerHTML = '';
-          block.appendChild(makeList(lines));
-          return;
-        }
-
-        const joined = joinWrappedLines(lines);
-        const wordCount = joined.split(/\s+/).length;
-        const looksLikeHeading = wordCount <= 12 && joined.length <= 90 &&
-          (headingPattern.test(joined) || block.classList.contains('source-block-heading'));
-
-        if (looksLikeHeading) block.classList.add('readable-heading');
-        if (notePattern.test(joined)) block.classList.add('readable-note');
-        if (keyPattern.test(joined)) block.classList.add('readable-key');
-
-        block.textContent = joined;
+      function headingLevel(line) {
+        if (romanHeading.test(line)) return 'subheading';
+        if (['Primary Objective', 'Secondary Objectives'].includes(line)) return 'subheading';
+        return 'heading';
       }
 
-      function beautifyLessonText(root = document) {
-        root.querySelectorAll('.source-page-text .source-block').forEach(beautifyBlock);
+      function extractPageTitle(raw, lessonId, pageNum) {
+        const lines = String(raw || '').split('\n').map(cleanLine).filter(Boolean);
+        for (const line of lines) {
+          if (isNoise(line, lessonId, pageNum)) continue;
+          if (noteStart.test(line) || sourceStart.test(line) || chartStart.test(line)) continue;
+          if (isHeading(line)) return line.replace(/^([IVXLCDM]+)\.\s+/, '');
+        }
+        return '';
       }
 
-      function improvePageLabels(root = document) {
-        root.querySelectorAll('.source-page').forEach(page => {
-          if (page.dataset.uxPrepared === '1') return;
-          page.dataset.uxPrepared = '1';
-          page.addEventListener('toggle', () => {
-            if (page.open) beautifyLessonText(page);
-          });
+      function parsePage(raw, lessonId, pageNum) {
+        const lines = String(raw || '').replace(/\r/g, '').split('\n').map(cleanLine);
+        const tokens = [];
+        let para = [];
+        let verse = null;
+        let list = null;
+        let listItem = null;
+        let pendingMarker = null;
+        let lastWasBlank = false;
+
+        const flushPara = () => {
+          const text = dehyphenJoin(para);
+          para = [];
+          if (!text) return;
+          if (keyStart.test(text)) tokens.push({ type: 'key', text });
+          else if (noteStart.test(text) || chartStart.test(text)) tokens.push({ type: 'note', text });
+          else if (sourceStart.test(text) || /Teacher[’']?s Notes\s*©/i.test(text)) tokens.push({ type: 'source', text });
+          else tokens.push({ type: 'paragraph', text });
+        };
+
+        const flushVerse = () => {
+          if (!verse) return;
+          tokens.push({ type: 'scripture', ref: verse.ref, text: dehyphenJoin(verse.lines) });
+          verse = null;
+        };
+
+        const ensureList = () => {
+          if (!list) list = { type: 'list', items: [] };
+        };
+
+        const flushListItem = () => {
+          if (!listItem) return;
+          ensureList();
+          const text = dehyphenJoin(listItem.lines);
+          if (text) list.items.push({ marker: listItem.marker, text });
+          listItem = null;
+        };
+
+        const flushList = () => {
+          flushListItem();
+          if (list && list.items.length) tokens.push(list);
+          list = null;
+          pendingMarker = null;
+        };
+
+        const flushAllText = () => {
+          flushVerse();
+          flushPara();
+          flushList();
+        };
+
+        for (let i = 0; i < lines.length; i++) {
+          let line = lines[i];
+
+          if (!line) {
+            if (verse) flushVerse();
+            else if (listItem) flushListItem();
+            else flushPara();
+            lastWasBlank = true;
+            continue;
+          }
+
+          if (isNoise(line, lessonId, pageNum)) continue;
+
+          // Copyright/footer text: preserve, but as a quiet source note.
+          if (/Teacher[’']?s Notes\s*©/i.test(line) || /Student[’']?s Notes\s*©/i.test(line)) {
+            flushAllText();
+            tokens.push({ type: 'source', text: line });
+            lastWasBlank = false;
+            continue;
+          }
+
+          // If a verse is open, a structural line ends the verse first.
+          if (verse && (isHeading(line) || scriptureRef.test(line) || keyStart.test(line) || noteStart.test(line))) {
+            flushVerse();
+          }
+
+          if (scriptureRef.test(line)) {
+            flushPara();
+            flushList();
+            flushVerse();
+            verse = { ref: line, lines: [] };
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (verse) {
+            verse.lines.push(line);
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (isHeading(line)) {
+            flushPara();
+            flushList();
+            const roman = line.match(romanHeading);
+            tokens.push({ type: headingLevel(line), text: roman ? roman[2] : line });
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (keyStart.test(line)) {
+            flushPara();
+            flushList();
+            tokens.push({ type: 'key', text: line });
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (noteStart.test(line) || chartStart.test(line)) {
+            flushPara();
+            flushList();
+            tokens.push({ type: 'note', text: line });
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (sourceStart.test(line)) {
+            flushPara();
+            flushList();
+            tokens.push({ type: 'source', text: line });
+            lastWasBlank = false;
+            continue;
+          }
+
+          const standalone = line.match(standaloneMarker);
+          if (standalone) {
+            flushPara();
+            flushListItem();
+            ensureList();
+            pendingMarker = standalone[1];
+            lastWasBlank = false;
+            continue;
+          }
+
+          const listMatch = line.match(listStart);
+          if (listMatch && !romanHeading.test(line)) {
+            flushPara();
+            flushListItem();
+            ensureList();
+            listItem = { marker: listMatch[1], lines: [] };
+            if (listMatch[2]) listItem.lines.push(listMatch[2]);
+            pendingMarker = null;
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (pendingMarker) {
+            ensureList();
+            listItem = { marker: pendingMarker, lines: [line] };
+            pendingMarker = null;
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (listItem && !lastWasBlank) {
+            listItem.lines.push(line);
+            lastWasBlank = false;
+            continue;
+          }
+
+          if (list && lastWasBlank) flushList();
+
+          para.push(line);
+          lastWasBlank = false;
+        }
+
+        flushAllText();
+        return tokens;
+      }
+
+      function renderTokens(container, tokens) {
+        container.innerHTML = '';
+        container.classList.add('reader-ready');
+
+        for (const token of tokens) {
+          let el;
+          if (token.type === 'heading') {
+            el = document.createElement('h3');
+            el.className = 'reader-block reader-heading';
+            el.textContent = token.text;
+          } else if (token.type === 'subheading') {
+            el = document.createElement('h4');
+            el.className = 'reader-block reader-subheading';
+            el.textContent = token.text;
+          } else if (token.type === 'paragraph') {
+            el = document.createElement('p');
+            el.className = 'reader-block reader-paragraph';
+            el.textContent = token.text;
+          } else if (token.type === 'key') {
+            el = document.createElement('div');
+            el.className = 'reader-block reader-key';
+            el.textContent = token.text;
+          } else if (token.type === 'note') {
+            el = document.createElement('div');
+            el.className = 'reader-block reader-note';
+            el.textContent = token.text;
+          } else if (token.type === 'source') {
+            el = document.createElement('div');
+            el.className = 'reader-block reader-source';
+            el.textContent = token.text;
+          } else if (token.type === 'scripture') {
+            el = document.createElement('blockquote');
+            el.className = 'reader-block reader-scripture';
+            const ref = document.createElement('span');
+            ref.className = 'reader-scripture-ref';
+            ref.textContent = token.ref;
+            const text = document.createElement('span');
+            text.className = 'reader-scripture-text';
+            text.textContent = token.text;
+            el.append(ref, text);
+          } else if (token.type === 'list') {
+            el = document.createElement('div');
+            el.className = 'reader-block reader-list';
+            for (const item of token.items) {
+              const row = document.createElement('div');
+              row.className = `reader-list-row ${/[•●▪◦]/.test(item.marker) ? 'is-bullet' : ''}`;
+              const marker = document.createElement('span');
+              marker.className = 'reader-marker';
+              marker.textContent = /[•●▪◦]/.test(item.marker) ? '•' : item.marker;
+              const text = document.createElement('span');
+              text.textContent = item.text;
+              row.append(marker, text);
+              el.appendChild(row);
+            }
+          }
+          if (el) container.appendChild(el);
+        }
+      }
+
+      function currentLessonId() {
+        const hash = location.hash.match(/lesson-(\d+)/i);
+        if (hash) return Number(hash[1]);
+        return Number(localStorage.getItem('utb:lastLesson')) || 1;
+      }
+
+      function formatCurrentLesson(root = document) {
+        const lessonId = currentLessonId();
+        const source = window.lessonPageData?.[String(lessonId)];
+        if (!source) return;
+
+        root.querySelectorAll('.source-page').forEach(pageEl => {
+          const pageNum = Number(pageEl.dataset.page);
+          const data = source.pages?.find(page => Number(page.page) === pageNum);
+          const target = pageEl.querySelector('.source-page-text');
+          if (!data || !target) return;
+
+          const key = `${lessonId}-${pageNum}`;
+          if (target.dataset.readerKey === key) return;
+          target.dataset.readerKey = key;
+
+          const tokens = parsePage(data.text || '', lessonId, pageNum);
+          renderTokens(target, tokens);
+
+          const title = extractPageTitle(data.text || '', lessonId, pageNum);
+          const strong = pageEl.querySelector('.source-page-summary strong');
+          const small = pageEl.querySelector('.source-page-summary small');
+          if (strong && title) strong.textContent = title;
+          if (small) small.textContent = `Page ${pageNum} of ${source.pageCount}`;
         });
       }
 
       const content = document.getElementById('lessonContent');
       if (content) {
-        const observer = new MutationObserver(() => {
+        let scheduled = false;
+        const schedule = () => {
+          if (scheduled) return;
+          scheduled = true;
           requestAnimationFrame(() => {
-            beautifyLessonText(content);
-            improvePageLabels(content);
+            scheduled = false;
+            formatCurrentLesson(content);
           });
-        });
-        observer.observe(content, { childList: true, subtree: true });
+        };
+        new MutationObserver(schedule).observe(content, { childList: true, subtree: true });
+        schedule();
       }
 
-      // Initial pass after the lesson app finishes first render.
-      setTimeout(() => {
-        beautifyLessonText();
-        improvePageLabels();
-      }, 80);
+      window.addEventListener('hashchange', () => setTimeout(() => formatCurrentLesson(), 40));
 
       const backTop = document.getElementById('uxBackTop');
       window.addEventListener('scroll', () => {
@@ -666,5 +774,6 @@
       backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     })();
   </script>
+
 </body>
 </html>
