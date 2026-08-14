@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="The Holy Spirit">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#264b4f"/>
+      <stop offset="100%" stop-color="#101716"/>
+    </linearGradient>
+    <radialGradient id="r" cx="35%" cy="25%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <circle cx="980" cy="160" r="180" fill="#c1d6e4" opacity="0.16"/>
+  <circle cx="220" cy="700" r="240" fill="#c1d6e4" opacity="0.12"/>
+  <circle cx="350" cy="250" r="260" fill="url(#r)" opacity="0.8"/>
+  <rect x="110" y="110" width="980" height="680" rx="46" fill="#fffdf8" fill-opacity="0.08" stroke="#fffdf8" stroke-opacity="0.15"/>
+  <rect x="160" y="160" width="300" height="300" rx="40" fill="#fffdf8" fill-opacity="0.13"/>
+  <text x="310" y="350" text-anchor="middle" font-size="130" font-family="Arial">🕊</text>
+  <text x="160" y="560" fill="#e8dfcf" font-size="28" font-weight="700" letter-spacing="4" font-family="Arial">UNLOCKING THE BIBLE</text>
+  <text x="160" y="640" fill="#ffffff" font-size="72" font-weight="700" font-family="Georgia, 'Times New Roman', serif">Lesson 09</text>
+  <text x="160" y="720" fill="#c1d6e4" font-size="48" font-weight="700" font-family="Georgia, 'Times New Roman', serif">The Holy Spirit</text>
+  <path d="M760 260c60-40 110-52 180-50 27 0 58 4 100 13" stroke="#c1d6e4" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M720 340c94 0 158 42 232 122" stroke="#fffdf8" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <path d="M700 500c120-30 225-5 300 80" stroke="#c1d6e4" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.45"/>
+</svg>
