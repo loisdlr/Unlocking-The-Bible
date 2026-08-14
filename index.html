@@ -3,10 +3,426 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f7f3ea" />
+  <meta name="theme-color" content="#f6f3ec" />
   <title>Unlocking the Bible | 12-Lesson Bible Study</title>
-  <meta name="description" content="A warm, creative, student-friendly 12-lesson Bible study with quick Scripture reference." />
+  <meta name="description" content="A modern, elegant and easy-to-read 12-lesson Bible study experience." />
   <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Index-only visual polish. No changes to app.js or lesson-pages.js are required. -->
+  <style>
+    :root {
+      --ux-cream: #f7f4ee;
+      --ux-paper: #fffdfa;
+      --ux-green: #173f32;
+      --ux-green-2: #245844;
+      --ux-green-soft: #edf4ef;
+      --ux-gold: #b38a4a;
+      --ux-gold-soft: #f7eddb;
+      --ux-text: #24302a;
+      --ux-muted: #6d756f;
+      --ux-line: #e4ded3;
+      --ux-shadow: 0 12px 34px rgba(37, 48, 41, .07);
+    }
+
+    html { scroll-padding-top: 92px; }
+    body {
+      background: var(--ux-cream) !important;
+      color: var(--ux-text) !important;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ---------- Header ---------- */
+    .topbar {
+      height: 72px !important;
+      padding: 0 22px !important;
+      border-bottom: 1px solid rgba(228, 222, 211, .9) !important;
+      background: rgba(255, 253, 250, .94) !important;
+      backdrop-filter: blur(18px) !important;
+      box-shadow: 0 2px 12px rgba(25, 43, 34, .035);
+    }
+    .brand-mark {
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 12px !important;
+      background: var(--ux-green) !important;
+      box-shadow: none !important;
+    }
+    .brand strong { font-size: 15px !important; }
+    .brand small { color: var(--ux-muted) !important; }
+    .top-chip {
+      background: var(--ux-green-soft) !important;
+      color: var(--ux-green) !important;
+      border: 0 !important;
+      padding: 8px 11px !important;
+    }
+    .primary-btn {
+      background: var(--ux-green) !important;
+      border-color: var(--ux-green) !important;
+      box-shadow: none !important;
+    }
+    .ghost-btn, .icon-btn {
+      background: #fff !important;
+      border-color: var(--ux-line) !important;
+    }
+
+    /* ---------- Left navigation ---------- */
+    .lesson-sidebar {
+      top: 72px !important;
+      height: calc(100vh - 72px) !important;
+      background: #f2eee6 !important;
+      border-right-color: var(--ux-line) !important;
+      padding: 20px 14px 26px !important;
+    }
+    .sidebar-head h2 { font-size: 23px !important; }
+    .sidebar-head p:not(.eyebrow) { font-size: 12px !important; }
+    .journey-card {
+      border-color: var(--ux-line) !important;
+      background: var(--ux-paper) !important;
+      box-shadow: none !important;
+    }
+    .search-box {
+      background: #fff !important;
+      border-color: var(--ux-line) !important;
+    }
+    .lesson-link {
+      border-radius: 12px !important;
+      padding: 9px !important;
+    }
+    .lesson-link.active {
+      background: var(--ux-green) !important;
+      color: #fff !important;
+      box-shadow: none !important;
+    }
+    .lesson-link.active .lesson-number {
+      background: rgba(255,255,255,.14) !important;
+      color: #fff !important;
+    }
+    .lesson-link.active span:last-child,
+    .lesson-link.active .lesson-done { color: rgba(255,255,255,.78) !important; }
+    .lesson-link.active .lesson-done { border-color: rgba(255,255,255,.22) !important; }
+
+    /* ---------- Main reading area ---------- */
+    .lesson-main {
+      padding: 28px clamp(20px, 3.7vw, 54px) 90px !important;
+      background: var(--ux-cream) !important;
+    }
+    .hero, .lesson-utility, .timeline-card, .content-wrap, .lesson-end {
+      max-width: 900px !important;
+    }
+
+    /* Calm, elegant hero */
+    .hero-card,
+    .premium-hero {
+      border-radius: 22px !important;
+      border: 1px solid #285441 !important;
+      background: linear-gradient(135deg, #163d30 0%, #23523f 100%) !important;
+      box-shadow: var(--ux-shadow) !important;
+      padding: 28px !important;
+      gap: 26px !important;
+    }
+    .hero h1 {
+      max-width: 720px;
+      margin-top: 12px !important;
+      font-size: clamp(36px, 4.7vw, 54px) !important;
+      line-height: 1.02 !important;
+      letter-spacing: -.035em !important;
+    }
+    .hero-summary {
+      max-width: 700px;
+      font-size: 16px !important;
+      line-height: 1.72 !important;
+      color: rgba(255,255,255,.82) !important;
+    }
+    .hero-pills { margin-top: 18px !important; }
+    .info-pill {
+      background: rgba(255,255,255,.09) !important;
+      border-color: rgba(255,255,255,.13) !important;
+      color: rgba(255,255,255,.8) !important;
+    }
+    .objective-card {
+      background: rgba(255,255,255,.08) !important;
+      border-color: rgba(255,255,255,.12) !important;
+      border-radius: 14px !important;
+    }
+    .objective-card p { color: rgba(255,255,255,.82) !important; }
+    .hero-art { min-height: 0 !important; }
+    .hero-graphic-card {
+      max-width: 260px !important;
+      margin: 0 !important;
+      border-radius: 18px !important;
+      padding: 7px !important;
+      background: rgba(255,255,255,.08) !important;
+      border-color: rgba(255,255,255,.12) !important;
+      box-shadow: none !important;
+    }
+    .hero-graphic { border-radius: 13px !important; }
+    .hero-note,
+    .premium-note {
+      max-width: 260px !important;
+      background: rgba(255,255,255,.08) !important;
+      border-color: rgba(255,255,255,.12) !important;
+      border-radius: 16px !important;
+      padding: 14px !important;
+    }
+    .hero-note h3 { font-size: 17px !important; }
+    .hero-note p, .hero-note li { font-size: 11.5px !important; line-height: 1.5 !important; }
+
+    /* Utilities: fewer visual boxes */
+    .lesson-utility { margin-top: 14px !important; }
+    .utility-grid,
+    .utility-grid-rich { gap: 10px !important; }
+    .utility-card {
+      border-color: var(--ux-line) !important;
+      background: var(--ux-paper) !important;
+      box-shadow: none !important;
+      border-radius: 15px !important;
+      padding: 14px !important;
+    }
+    .utility-card h3 { font-size: 13px !important; }
+    .utility-card p { font-size: 11.5px !important; }
+    .soft-btn {
+      border-radius: 10px !important;
+      background: #f4f1eb !important;
+      border-color: var(--ux-line) !important;
+    }
+    .source-search { border-color: var(--ux-line) !important; background: #fff !important; }
+
+    .timeline-card {
+      margin-top: 10px !important;
+      border-radius: 14px !important;
+      border-color: var(--ux-line) !important;
+      background: #fbf9f4 !important;
+      box-shadow: none !important;
+      padding: 13px !important;
+    }
+
+    /* ---------- Full lesson content ---------- */
+    .content-wrap { margin-top: 26px !important; }
+    .source-intro {
+      align-items: center !important;
+      margin-bottom: 14px !important;
+      padding: 0 !important;
+    }
+    .source-intro h2 {
+      font-size: clamp(27px, 3vw, 34px) !important;
+      color: var(--ux-text) !important;
+    }
+    .source-intro p:not(.eyebrow) {
+      max-width: 680px !important;
+      font-size: 13px !important;
+      line-height: 1.7 !important;
+    }
+    .source-count { background: var(--ux-gold-soft) !important; }
+
+    /* Theme cards only once, not everywhere */
+    .creative-gallery {
+      grid-template-columns: 1fr 1fr !important;
+      margin-bottom: 18px !important;
+    }
+    .creative-gallery .creative-card-graphic { display: none !important; }
+    .creative-card {
+      border-color: var(--ux-line) !important;
+      border-radius: 15px !important;
+      background: var(--ux-paper) !important;
+      box-shadow: none !important;
+      padding: 15px !important;
+    }
+
+    /* Page accordions */
+    .source-page {
+      margin-bottom: 10px !important;
+      border: 1px solid var(--ux-line) !important;
+      border-radius: 16px !important;
+      background: var(--ux-paper) !important;
+      box-shadow: none !important;
+    }
+    .source-page summary {
+      min-height: 68px;
+      padding: 13px 16px !important;
+      grid-template-columns: 42px minmax(0,1fr) auto !important;
+    }
+    .source-page[open] summary {
+      background: #fbf8f2 !important;
+      border-bottom-color: var(--ux-line) !important;
+    }
+    .source-page-number {
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 11px !important;
+      background: var(--ux-green-soft) !important;
+      color: var(--ux-green) !important;
+    }
+    .source-page-summary strong { font-size: 17px !important; }
+    .source-page-summary small { font-size: 11px !important; }
+    .source-page-actions-hint {
+      font-size: 0 !important;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--ux-green-soft);
+      color: var(--ux-green) !important;
+    }
+    .source-page-actions-hint::after { content: "↓"; font-size: 12px; }
+    .source-page[open] .source-page-actions-hint::after { content: "↑"; }
+
+    .source-page-body {
+      padding: 22px clamp(18px, 4vw, 38px) 30px !important;
+      background: #fff !important;
+    }
+    .source-page-toolbar {
+      padding-bottom: 12px;
+      margin-bottom: 20px !important;
+      border-bottom: 1px solid #efe9de;
+    }
+    .source-text-label {
+      margin-bottom: 14px !important;
+      color: var(--ux-gold) !important;
+    }
+
+    /* This is the key readability change */
+    .source-page-text {
+      max-width: 740px;
+      margin: 0 auto;
+      font-family: Georgia, "Times New Roman", serif !important;
+      color: #2b332f !important;
+      font-size: 16px !important;
+      line-height: 1.82 !important;
+    }
+    .source-block {
+      margin: 0 0 18px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    .source-block.readable-heading {
+      margin-top: 26px !important;
+      margin-bottom: 10px !important;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: 19px;
+      line-height: 1.35;
+      color: var(--ux-green);
+    }
+    .source-block.readable-key {
+      margin: 22px 0 !important;
+      padding: 14px 16px !important;
+      border-left: 3px solid var(--ux-gold) !important;
+      border-radius: 0 12px 12px 0 !important;
+      background: #fbf5e9 !important;
+      color: #5b4729 !important;
+      font-weight: 700;
+    }
+    .source-block.readable-scripture {
+      margin: 20px 0 !important;
+      padding: 15px 18px !important;
+      border: 1px solid #d8e4dc !important;
+      border-radius: 13px !important;
+      background: #f5f9f6 !important;
+      color: #304238 !important;
+    }
+    .readable-scripture .scripture-ref {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ux-green);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .source-block.readable-note {
+      padding: 12px 14px !important;
+      border-radius: 11px !important;
+      background: #f6f3ed !important;
+      color: #666d68 !important;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+      font-size: 12px !important;
+      line-height: 1.65 !important;
+    }
+    .source-page-text ul,
+    .source-page-text ol {
+      margin: 10px 0 20px 22px;
+      padding: 0;
+    }
+    .source-page-text li { margin: 7px 0; padding-left: 4px; }
+
+    /* Quiz + reflection */
+    .section-card {
+      border-color: var(--ux-line) !important;
+      border-radius: 16px !important;
+      box-shadow: none !important;
+      background: var(--ux-paper) !important;
+    }
+    .notes-card {
+      border-radius: 18px !important;
+      background: var(--ux-green) !important;
+      box-shadow: none !important;
+    }
+
+    /* ---------- Bible panel ---------- */
+    .bible-panel {
+      top: 72px !important;
+      height: calc(100vh - 72px) !important;
+      border-left-color: var(--ux-line) !important;
+      background: #fff !important;
+    }
+    .bible-search { border-color: var(--ux-line) !important; background: #fbfaf7 !important; }
+    .translation-tabs button { border-radius: 9px !important; }
+    .translation-tabs button.active { background: var(--ux-green) !important; }
+
+    /* Back to top helper */
+    #uxBackTop {
+      position: fixed;
+      right: 390px;
+      bottom: 24px;
+      z-index: 45;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--ux-line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ux-green);
+      box-shadow: var(--ux-shadow);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: .2s ease;
+    }
+    #uxBackTop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    @media (max-width: 1220px) {
+      #uxBackTop { right: 350px; }
+    }
+
+    @media (max-width: 980px) {
+      .topbar { height: 72px !important; }
+      .lesson-sidebar, .bible-panel { top: 72px !important; }
+      .hero-card, .premium-hero { grid-template-columns: 1fr !important; padding: 22px !important; }
+      .hero-art { display: none !important; }
+      .creative-gallery { grid-template-columns: 1fr !important; }
+      .source-page-body { padding: 20px 18px 26px !important; }
+      .source-page-text { font-size: 15.5px !important; line-height: 1.78 !important; }
+      #uxBackTop { right: 18px; bottom: 82px; }
+    }
+
+    @media (max-width: 560px) {
+      .lesson-main { padding: 18px 12px 72px !important; }
+      .hero-card, .premium-hero { border-radius: 18px !important; padding: 20px 17px !important; }
+      .hero h1 { font-size: 37px !important; }
+      .objective-grid { grid-template-columns: 1fr !important; }
+      .source-intro { align-items: flex-start !important; }
+      .source-count { margin-top: 4px; }
+      .source-page summary { padding: 12px !important; grid-template-columns: 38px minmax(0,1fr) 28px !important; }
+      .source-page-summary small { white-space: normal !important; display: -webkit-box !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+      .source-page-body { padding: 18px 15px 24px !important; }
+      .source-page-text { font-size: 15.5px !important; line-height: 1.76 !important; }
+    }
+  </style>
 </head>
 <body data-font="md">
   <div class="app-shell">
@@ -17,7 +433,7 @@
           <span class="brand-mark">U</span>
           <span>
             <strong>Unlocking the Bible</strong>
-            <small>12-Lesson Bible Study</small>
+            <small>Read · Understand · Apply</small>
           </span>
         </a>
       </div>
@@ -29,33 +445,33 @@
 
       <div class="topbar-actions">
         <div class="font-controls" aria-label="Reading size controls">
-          <button class="icon-btn" id="fontDecreaseBtn" title="Decrease text size">A-</button>
+          <button class="icon-btn" id="fontDecreaseBtn" title="Decrease text size">A−</button>
           <button class="icon-btn" id="fontIncreaseBtn" title="Increase text size">A+</button>
         </div>
-        <button class="ghost-btn" id="focusBtn" title="Hide side panels">Focus mode</button>
+        <button class="ghost-btn" id="focusBtn" title="Hide side panels">Focus</button>
         <button class="primary-btn" id="bibleMobileBtn">📖 Bible</button>
       </div>
     </header>
 
     <aside class="lesson-sidebar" id="lessonSidebar" aria-label="Lessons">
       <div class="sidebar-head">
-        <p class="eyebrow">COURSE JOURNEY</p>
-        <h2>12 Lessons</h2>
-        <p>Open any lesson, save notes on this device, and keep Scripture beside you while you study.</p>
+        <p class="eyebrow">YOUR STUDY JOURNEY</p>
+        <h2>12 Bible Lessons</h2>
+        <p>Choose a lesson, read at your own pace, open Scriptures beside the lesson, and save personal reflections.</p>
       </div>
 
       <section class="journey-card" id="journeyCard"></section>
 
       <label class="search-box">
         <span>⌕</span>
-        <input id="lessonSearch" type="search" placeholder="Search lessons" autocomplete="off" />
+        <input id="lessonSearch" type="search" placeholder="Find a lesson..." autocomplete="off" />
       </label>
 
       <nav id="lessonNav" class="lesson-nav"></nav>
 
       <div class="sidebar-footer">
-        <span>Public student version</span>
-        <small>Inspired by the Unlocking the Bible lesson flow</small>
+        <span>Student study experience</span>
+        <small>Your progress and notes stay in this browser.</small>
       </div>
     </aside>
 
@@ -70,14 +486,14 @@
     <aside class="bible-panel" id="biblePanel" aria-label="Bible quick reference">
       <div class="bible-head">
         <div>
-          <p class="eyebrow">QUICK REFERENCE</p>
+          <p class="eyebrow">SCRIPTURE REFERENCE</p>
           <h2>📖 Bible</h2>
         </div>
         <button class="icon-btn mobile-only" id="bibleCloseBtn" aria-label="Close Bible">✕</button>
       </div>
 
       <form class="bible-search" id="bibleSearchForm">
-        <input id="bibleSearchInput" placeholder="e.g. Acts 2:38 or grace" aria-label="Bible passage or keyword" />
+        <input id="bibleSearchInput" placeholder="Acts 2:38 or search a word" aria-label="Bible passage or keyword" />
         <button type="submit" class="icon-btn" aria-label="Search Bible">→</button>
       </form>
 
@@ -93,24 +509,162 @@
       <div class="bible-view" id="bibleView">
         <div class="bible-empty">
           <span class="bible-icon">📖</span>
-          <h3>Keep Scripture beside the lesson</h3>
-          <p>Click any Scripture reference in a lesson. You can switch between KJV, NIV, NLT and a Tagalog translation when your Bible API is connected.</p>
-          <button class="text-link" id="demoVerseBtn">Try Acts 2:38</button>
+          <h3>Scripture stays beside your lesson</h3>
+          <p>Click a Scripture reference while studying and it will open here without leaving the lesson.</p>
+          <button class="text-link" id="demoVerseBtn">Open Acts 2:38</button>
         </div>
       </div>
 
       <div class="bible-status" id="bibleStatus">
         <span class="status-dot"></span>
-        <span>Bible API can be connected through Vercel</span>
+        <span>Bible service ready when API is configured</span>
       </div>
     </aside>
 
     <div class="scrim" id="scrim"></div>
   </div>
 
-
+  <button id="uxBackTop" type="button" aria-label="Back to top" title="Back to top">↑</button>
 
   <script src="./lesson-pages.js"></script>
   <script src="./app.js"></script>
+
+  <!-- Index-only readability enhancer: repairs PDF line-wraps after app.js renders. -->
+  <script>
+    (() => {
+      const scripturePattern = /^(?:[1-3]\s*)?[A-Za-z][A-Za-z .’'\-]+\s+\d{1,3}:\d{1,3}(?:[-–]\d{1,3})?\s*$/;
+      const notePattern = /^(?:\[?Note to Teacher|Teacher[’']?s Notes|Student[’']?s Notes|Source:|©\s*\d{4})/i;
+      const keyPattern = /^Key\s*#?\d*\s*:/i;
+      const headingPattern = /^(?:[A-Z]|[IVX]+\.|[A-Z]\.|\d+\.)?\s*[A-Z][A-Z0-9 ,:&’'\-()]{4,}$/;
+      const bulletPattern = /^(?:[•●▪◦]|[-–—]|\d+[.)]|[A-Za-z][.)])\s+/;
+
+      function htmlLines(block) {
+        const clone = block.cloneNode(true);
+        clone.querySelectorAll('br').forEach(br => br.replaceWith('\n'));
+        return clone.textContent
+          .split('\n')
+          .map(line => line.replace(/\s+/g, ' ').trim())
+          .filter(Boolean);
+      }
+
+      function joinWrappedLines(lines) {
+        let out = '';
+        lines.forEach(line => {
+          if (!out) { out = line; return; }
+          if (/\-$/.test(out) && /^[a-z]/.test(line)) out = out.slice(0, -1) + line;
+          else out += ' ' + line;
+        });
+        return out.replace(/\s+([,.;:!?])/g, '$1').replace(/\s{2,}/g, ' ').trim();
+      }
+
+      function makeList(lines) {
+        const list = document.createElement('ul');
+        lines.forEach(line => {
+          const li = document.createElement('li');
+          li.textContent = line.replace(bulletPattern, '').trim();
+          list.appendChild(li);
+        });
+        return list;
+      }
+
+      function beautifyBlock(block) {
+        if (block.dataset.uxCleaned === '1') return;
+        block.dataset.uxCleaned = '1';
+
+        const lines = htmlLines(block);
+        if (!lines.length) return;
+
+        // Hide the duplicated lone page number visually, but keep it in the DOM/source.
+        if (lines.length === 1 && /^\d{1,3}$/.test(lines[0])) {
+          block.classList.add('readable-note');
+          block.style.opacity = '.45';
+          block.style.fontSize = '10px';
+          block.textContent = `Page ${lines[0]}`;
+          return;
+        }
+
+        if (lines.length === 1 && keyPattern.test(lines[0])) {
+          block.classList.add('readable-key');
+          block.textContent = lines[0];
+          return;
+        }
+
+        if (lines.length === 1 && notePattern.test(lines[0])) {
+          block.classList.add('readable-note');
+          block.textContent = lines[0];
+          return;
+        }
+
+        // Scripture reference on first line + verse text below.
+        if (scripturePattern.test(lines[0]) && lines.length > 1) {
+          block.classList.add('readable-scripture');
+          block.innerHTML = '';
+          const ref = document.createElement('span');
+          ref.className = 'scripture-ref';
+          ref.textContent = lines[0];
+          const verse = document.createElement('span');
+          verse.textContent = joinWrappedLines(lines.slice(1));
+          block.append(ref, verse);
+          return;
+        }
+
+        // Lists: keep them scannable instead of joining them into one sentence.
+        const bulletLines = lines.filter(line => bulletPattern.test(line));
+        if (bulletLines.length >= 2 && bulletLines.length >= Math.ceil(lines.length * .6)) {
+          block.innerHTML = '';
+          block.appendChild(makeList(lines));
+          return;
+        }
+
+        const joined = joinWrappedLines(lines);
+        const wordCount = joined.split(/\s+/).length;
+        const looksLikeHeading = wordCount <= 12 && joined.length <= 90 &&
+          (headingPattern.test(joined) || block.classList.contains('source-block-heading'));
+
+        if (looksLikeHeading) block.classList.add('readable-heading');
+        if (notePattern.test(joined)) block.classList.add('readable-note');
+        if (keyPattern.test(joined)) block.classList.add('readable-key');
+
+        block.textContent = joined;
+      }
+
+      function beautifyLessonText(root = document) {
+        root.querySelectorAll('.source-page-text .source-block').forEach(beautifyBlock);
+      }
+
+      function improvePageLabels(root = document) {
+        root.querySelectorAll('.source-page').forEach(page => {
+          if (page.dataset.uxPrepared === '1') return;
+          page.dataset.uxPrepared = '1';
+          page.addEventListener('toggle', () => {
+            if (page.open) beautifyLessonText(page);
+          });
+        });
+      }
+
+      const content = document.getElementById('lessonContent');
+      if (content) {
+        const observer = new MutationObserver(() => {
+          requestAnimationFrame(() => {
+            beautifyLessonText(content);
+            improvePageLabels(content);
+          });
+        });
+        observer.observe(content, { childList: true, subtree: true });
+      }
+
+      // Initial pass after the lesson app finishes first render.
+      setTimeout(() => {
+        beautifyLessonText();
+        improvePageLabels();
+      }, 80);
+
+      const backTop = document.getElementById('uxBackTop');
+      window.addEventListener('scroll', () => {
+        backTop?.classList.toggle('show', window.scrollY > 650);
+      }, { passive: true });
+      backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
+  </script>
 </body>
 </html>
