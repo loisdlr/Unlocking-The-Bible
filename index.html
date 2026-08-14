@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f3ea" />
+  <title>Unlocking the Bible | 12-Lesson Bible Study</title>
+  <meta name="description" content="A warm, creative, student-friendly 12-lesson Bible study with quick Scripture reference." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body data-font="md">
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn mobile-only" id="lessonMenuBtn" aria-label="Open lesson menu">☰</button>
+        <a class="brand" href="#" id="brandHome" aria-label="Unlocking the Bible home">
+          <span class="brand-mark">U</span>
+          <span>
+            <strong>Unlocking the Bible</strong>
+            <small>12-Lesson Bible Study</small>
+          </span>
+        </a>
+      </div>
+
+      <div class="topbar-meta">
+        <span class="top-chip" id="progressChip">0 / 12 completed</span>
+        <span class="top-chip hide-sm" id="currentChip">Lesson 1</span>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="font-controls" aria-label="Reading size controls">
+          <button class="icon-btn" id="fontDecreaseBtn" title="Decrease text size">A-</button>
+          <button class="icon-btn" id="fontIncreaseBtn" title="Increase text size">A+</button>
+        </div>
+        <button class="ghost-btn" id="focusBtn" title="Hide side panels">Focus mode</button>
+        <button class="primary-btn" id="bibleMobileBtn">📖 Bible</button>
+      </div>
+    </header>
+
+    <aside class="lesson-sidebar" id="lessonSidebar" aria-label="Lessons">
+      <div class="sidebar-head">
+        <p class="eyebrow">COURSE JOURNEY</p>
+        <h2>12 Lessons</h2>
+        <p>Open any lesson, save notes on this device, and keep Scripture beside you while you study.</p>
+      </div>
+
+      <section class="journey-card" id="journeyCard"></section>
+
+      <label class="search-box">
+        <span>⌕</span>
+        <input id="lessonSearch" type="search" placeholder="Search lessons" autocomplete="off" />
+      </label>
+
+      <nav id="lessonNav" class="lesson-nav"></nav>
+
+      <div class="sidebar-footer">
+        <span>Public student version</span>
+        <small>Inspired by the Unlocking the Bible lesson flow</small>
+      </div>
+    </aside>
+
+    <main class="lesson-main" id="lessonMain">
+      <section class="hero" id="lessonHero"></section>
+      <section class="lesson-utility" id="lessonUtility"></section>
+      <section class="timeline-card" id="timeline"></section>
+      <section class="content-wrap" id="lessonContent"></section>
+      <section class="lesson-end" id="lessonEnd"></section>
+    </main>
+
+    <aside class="bible-panel" id="biblePanel" aria-label="Bible quick reference">
+      <div class="bible-head">
+        <div>
+          <p class="eyebrow">QUICK REFERENCE</p>
+          <h2>📖 Bible</h2>
+        </div>
+        <button class="icon-btn mobile-only" id="bibleCloseBtn" aria-label="Close Bible">✕</button>
+      </div>
+
+      <form class="bible-search" id="bibleSearchForm">
+        <input id="bibleSearchInput" placeholder="e.g. Acts 2:38 or grace" aria-label="Bible passage or keyword" />
+        <button type="submit" class="icon-btn" aria-label="Search Bible">→</button>
+      </form>
+
+      <div class="translation-tabs" id="translationTabs" role="tablist" aria-label="Bible translation">
+        <button data-version="KJV" class="active">KJV</button>
+        <button data-version="NIV">NIV</button>
+        <button data-version="NLT">NLT</button>
+        <button data-version="TAGALOG">Tagalog</button>
+      </div>
+
+      <div class="quick-refs" id="recentRefs"></div>
+
+      <div class="bible-view" id="bibleView">
+        <div class="bible-empty">
+          <span class="bible-icon">📖</span>
+          <h3>Keep Scripture beside the lesson</h3>
+          <p>Click any Scripture reference in a lesson. You can switch between KJV, NIV, NLT and a Tagalog translation when your Bible API is connected.</p>
+          <button class="text-link" id="demoVerseBtn">Try Acts 2:38</button>
+        </div>
+      </div>
+
+      <div class="bible-status" id="bibleStatus">
+        <span class="status-dot"></span>
+        <span>Bible API can be connected through Vercel</span>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim"></div>
+  </div>
+
+
+
+  <script src="./lesson-pages.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
