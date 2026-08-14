@@ -1189,6 +1189,331 @@ img { display: block; max-width: 100%; }
   .reference-anatomy { flex-wrap: wrap; justify-content: flex-start; }
   .reference-anatomy > div { width: 100%; margin-left: 0; }
 }
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.days-grid article,
+.timeline-cards article,
+.tabernacle-path article,
+.flow-steps article,
+.family-node,
+.pill-grid span {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+.days-grid article {
+  padding: 16px 14px;
+  min-height: 92px;
+}
+.days-grid small,
+.timeline-cards small {
+  display: block;
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.days-grid strong { display:block; margin-top: 8px; font-size: 14px; line-height:1.35; }
+.flow-steps {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.flow-steps article {
+  flex: 1 1 140px;
+  padding: 16px 14px;
+  min-width: 120px;
+}
+.flow-steps h4 { margin: 0 0 6px; font-size: 14px; }
+.flow-steps p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.flow-arrow {
+  align-self: center;
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 700;
+}
+.compact-flow article { flex-basis: 110px; }
+.family-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.family-flow > span {
+  align-self: center;
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 700;
+}
+.family-node {
+  flex: 1 1 180px;
+  padding: 16px 14px;
+  text-align: center;
+}
+.family-node strong { display:block; font-size: 16px; }
+.family-node span { display:block; margin-top: 5px; color: var(--muted); font-size: 11px; }
+.pill-grid {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pill-grid span {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 12px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.tabernacle-path {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.tabernacle-path article {
+  padding: 16px 14px;
+  position: relative;
+}
+.path-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+.tabernacle-path h4 { margin: 10px 0 5px; font-size: 14px; }
+.tabernacle-path p { margin:0; color: var(--muted); font-size: 11px; }
+.timeline-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.timeline-cards article {
+  padding: 16px 14px;
+  min-height: 100px;
+}
+.timeline-cards p { margin: 8px 0 0; font-size: 11px; line-height: 1.5; color: var(--muted); }
+.spirit-grid,
+.doctrine-grid { grid-template-columns: repeat(4, 1fr); }
+.endtimes-graphic .flow-steps article h4,
+.passover-steps article h4 { margin: 0; }
+.chart-note {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(27,62,48,.06), rgba(212,183,124,.14));
+  border: 1px solid rgba(214, 201, 173, 0.75);
+}
+.chart-note p { margin-bottom: 0; }
+.visual-panel .clean-list,
+.visual-panel .reading-paragraph,
+.visual-panel .scripture-card,
+.visual-panel .key-callout,
+.visual-panel .teacher-note,
+.visual-panel .source-note { margin-bottom: 12px; }
+
+@media (max-width: 900px) {
+  .days-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline-cards { grid-template-columns: repeat(2, 1fr); }
+  .tabernacle-path { grid-template-columns: repeat(2, 1fr); }
+  .spirit-grid, .doctrine-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .days-grid,
+  .timeline-cards,
+  .tabernacle-path,
+  .spirit-grid,
+  .doctrine-grid,
+  .feature-grid { grid-template-columns: 1fr; }
+  .flow-steps,
+  .family-flow { flex-direction: column; }
+  .flow-arrow,
+  .family-flow > span { transform: rotate(90deg); }
+}
+
+/* Presentation view */
+.presentation-topbar {
+  align-items: end;
+  gap: 16px;
+}
+.presentation-caption {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.presentation-actions {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+.slide-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.76);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.slide-counter {
+  min-width: 84px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--green);
+}
+.presentation-deck {
+  display: block;
+}
+.deck-slide {
+  display: none;
+  animation: fadeSlide .25s ease;
+}
+.deck-slide.active {
+  display: block;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.deck-slide .transcript-section,
+.deck-slide .quick-review,
+.deck-slide .reflection-card {
+  min-height: min(74vh, 900px);
+  padding: 34px 38px;
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255,253,248,.98), rgba(247,242,233,.96));
+  border: 1px solid rgba(223,217,204,.95);
+  box-shadow: 0 28px 70px rgba(17, 31, 25, .08);
+}
+.deck-slide .transcript-heading {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(223,217,204,.9);
+}
+.deck-slide .transcript-heading h2,
+.deck-slide .quick-review h2,
+.deck-slide .reflection-card h2 {
+  font-size: clamp(28px, 3.2vw, 42px);
+  letter-spacing: -.03em;
+  line-height: 1.08;
+}
+.deck-slide .section-number,
+.deck-slide .eyebrow {
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+.deck-slide .transcript-body {
+  max-width: 980px;
+}
+.deck-slide .reading-paragraph,
+.deck-slide .clean-list li,
+.deck-slide .scripture-text,
+.deck-slide .teacher-note,
+.deck-slide .source-note,
+.deck-slide textarea,
+.deck-slide .reflection-prompt {
+  font-size: clamp(17px, 1.32vw, 20px);
+  line-height: 1.78;
+}
+.deck-slide .subheading {
+  font-size: clamp(20px, 2vw, 28px);
+  margin-top: 26px;
+}
+.deck-slide .info-graphic {
+  padding: 30px;
+  border-radius: 30px;
+}
+.deck-slide .graphic-heading h3 {
+  font-size: clamp(26px, 2.7vw, 38px);
+}
+.deck-slide .compare-card-head h3,
+.deck-slide .visual-panel-head h3 { font-size: 24px; }
+.deck-slide .visual-panel,
+.deck-slide .compare-card { box-shadow: var(--shadow-sm); }
+.deck-slide .scripture-card,
+.deck-slide .key-callout,
+.deck-slide .teacher-note,
+.deck-slide .chart-note,
+.deck-slide .source-note {
+  border-radius: 22px;
+}
+.deck-slide .quiz-question {
+  font-size: 22px;
+  line-height: 1.5;
+}
+.deck-slide .quiz-options {
+  grid-template-columns: 1fr;
+}
+.deck-slide textarea {
+  min-height: 240px;
+}
+.section-nav {
+  position: sticky;
+  top: calc(var(--topbar) + 10px);
+  z-index: 20;
+  background: rgba(244,241,234,.86);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(223,217,204,.85);
+  border-radius: 18px;
+  padding: 10px;
+}
+.section-chip {
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+.section-chip.active {
+  background: var(--green);
+  color: #fff;
+}
+.transcript-status {
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+@media (max-width: 980px) {
+  .presentation-actions { justify-items: stretch; }
+  .presentation-topbar { gap: 12px; }
+  .deck-slide .transcript-section,
+  .deck-slide .quick-review,
+  .deck-slide .reflection-card {
+    min-height: auto;
+    padding: 24px 20px;
+    border-radius: 24px;
+  }
+  .section-nav {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .slide-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .deck-slide .transcript-heading h2,
+  .deck-slide .quick-review h2,
+  .deck-slide .reflection-card h2 { font-size: 28px; }
+  .deck-slide .reading-paragraph,
+  .deck-slide .clean-list li,
+  .deck-slide .scripture-text,
+  .deck-slide .teacher-note,
+  .deck-slide .source-note,
+  .deck-slide textarea,
+  .deck-slide .reflection-prompt { font-size: 16px; }
+}
 
 </style>
 </head>
@@ -1968,19 +2293,88 @@ function renderMillenniumGraphic() {
     </section>`;
 }
 
-function sectionGraphic(section) {
-  if (section.title === 'Arrangement Of The Bible') return renderBibleArrangementGraphic();
-  if (section.title === 'The Great Tribulation') return renderTribulationJudgmentsGraphic();
-  if (section.title === 'Eternity') return renderGenesisRevelationGraphic();
-  if (section.title === 'Millennium Kingdom Of God') return renderMillenniumGraphic();
+function renderCreationGraphic() {
+  const days = [
+    ['Day 1','Light'],['Day 2','Sky'],['Day 3','Land & Seas'],['Day 4','Sun, Moon & Stars'],['Day 5','Birds & Sea Creatures'],['Day 6','Animals & Humanity'],['Day 7','Rest']
+  ];
+  return `<section class="info-graphic creation-graphic"><div class="graphic-heading"><span class="graphic-kicker">GENESIS 1</span><h3>Creation at a glance</h3><p>A simple visual flow for the creation account highlighted in this lesson.</p></div><div class="days-grid">${days.map(([d,t])=>`<article><small>${d}</small><strong>${t}</strong></article>`).join('')}</div></section>`;
+}
+
+function renderNoahGraphic() {
+  const items = [['Grace','Noah found grace in the eyes of the Lord'],['Faith','Noah believed God\'s warning'],['Obedience','Noah built the ark as instructed']];
+  return `<section class="info-graphic salvation-flow"><div class="graphic-heading"><span class="graphic-kicker">NOAH</span><h3>Grace → Faith → Obedience</h3><p>The lesson consistently shows salvation as God\'s grace received through faith and answered with obedience.</p></div><div class="flow-steps">${items.map(([t,d])=>`<article><h4>${t}</h4><p>${d}</p></article>`).join('<span class="flow-arrow">→</span>')}</div></section>`;
+}
+
+function renderPatriarchGraphic() {
+  return `<section class="info-graphic patriarch-graphic"><div class="graphic-heading"><span class="graphic-kicker">PROMISE</span><h3>The patriarch story line</h3><p>A quick family-line overview connecting the promise from Abraham to Joseph.</p></div><div class="family-flow"><div class="family-node"><strong>Abraham</strong><span>Promise & covenant</span></div><span>→</span><div class="family-node"><strong>Isaac</strong><span>Promised son</span></div><span>→</span><div class="family-node"><strong>Jacob / Israel</strong><span>Twelve tribes</span></div><span>→</span><div class="family-node"><strong>Joseph</strong><span>Preservation in Egypt</span></div></div></section>`;
+}
+
+function renderPassoverGraphic() {
+  const steps = ['Choose the lamb','Apply the blood','Eat in readiness','Judgment passes over','Deliverance begins'];
+  const plagues = ['Water to blood','Frogs','Lice','Flies','Livestock disease','Boils','Hail','Locusts','Darkness','Death of the firstborn'];
+  return `<section class="info-graphic passover-graphic"><div class="graphic-heading"><span class="graphic-kicker">EXODUS</span><h3>Passover & deliverance</h3><p>The lesson uses Passover as a strong visual picture of salvation, deliverance, and covenant identity.</p></div><div class="flow-steps passover-steps">${steps.map(item=>`<article><h4>${item}</h4></article>`).join('<span class="flow-arrow">→</span>')}</div><div class="pill-grid">${plagues.map((p,i)=>`<span>${i+1}. ${p}</span>`).join('')}</div></section>`;
+}
+
+function renderTabernacleGraphic() {
+  const items = [['Brazen Altar','Sacrifice'],['Laver','Cleansing'],['Lampstand','Light'],['Table of Showbread','Provision'],['Altar of Incense','Prayer'],['Ark of the Covenant','Presence']];
+  return `<section class="info-graphic tabernacle-graphic"><div class="graphic-heading"><span class="graphic-kicker">TABERNACLE</span><h3>From outer court to most holy place</h3><p>A creative overview of the tabernacle furnishings mentioned in the lesson.</p></div><div class="tabernacle-path">${items.map(([t,d],i)=>`<article><div class="path-number">${i+1}</div><h4>${t}</h4><p>${d}</p></article>`).join('')}</div></section>`;
+}
+
+function renderJesusGraphic() {
+  const items = [['Birth','God manifest in the flesh'],['Ministry','Teaching, miracles, compassion'],['Cross','Jesus died for our sins'],['Burial','He was buried'],['Resurrection','He rose again']];
+  return `<section class="info-graphic jesus-graphic"><div class="graphic-heading"><span class="graphic-kicker">THE GOSPELS</span><h3>Jesus at the center</h3><p>The main story flow of the lesson, from Christ\'s birth to His resurrection.</p></div><div class="timeline-cards">${items.map(([t,d])=>`<article><small>${t}</small><p>${d}</p></article>`).join('')}</div></section>`;
+}
+
+function renderPlanOfSalvationGraphic() {
+  const items = [['Know','Hear the gospel'],['Agree','Believe the truth'],['Respond','Repent'],['Obey','Be baptized in Jesus\' name'],['Receive','The gift of the Holy Spirit']];
+  return `<section class="info-graphic salvation-graphic"><div class="graphic-heading"><span class="graphic-kicker">ACTS 2:38</span><h3>New Testament plan of salvation</h3><p>A clear visual sequence based on the lesson\'s emphasis on responding to the Gospel.</p></div><div class="flow-steps">${items.map(([t,d])=>`<article><h4>${t}</h4><p>${d}</p></article>`).join('<span class="flow-arrow">→</span>')}</div></section>`;
+}
+
+function renderHolySpiritGraphic() {
+  const items = [['Promised','Promised by God'],['Poured Out','First received at Pentecost'],['Powerful','Empowers holy living and witness'],['Personal','Must be personally received']];
+  return `<section class="info-graphic spirit-graphic"><div class="graphic-heading"><span class="graphic-kicker">HOLY SPIRIT</span><h3>The promise of the Spirit</h3><p>The lesson presents the Holy Spirit as promised, poured out, powerful, and necessary.</p></div><div class="feature-grid spirit-grid">${items.map(([t,d])=>`<article><h4>${t}</h4><p>${d}</p></article>`).join('')}</div></section>`;
+}
+
+function renderApostlesDoctrineGraphic() {
+  const items = [['Authority','The apostles were chosen and commissioned by Christ'],['Teaching','The doctrine became the foundation of the Church'],['Practice','The early Church continued steadfastly in it'],['Cost','Believers suffered persecution for the doctrine']];
+  return `<section class="info-graphic doctrine-graphic"><div class="graphic-heading"><span class="graphic-kicker">ACTS 2:42</span><h3>The apostles\' doctrine</h3><p>A clean summary of why this lesson treats apostolic teaching as essential.</p></div><div class="feature-grid doctrine-grid">${items.map(([t,d])=>`<article><h4>${t}</h4><p>${d}</p></article>`).join('')}</div></section>`;
+}
+
+function renderEndTimesTimelineGraphic() {
+  const items = ['Signs Now','Rapture','Tribulation','Second Coming','Millennium','Judgment','Eternity'];
+  return `<section class="info-graphic endtimes-graphic"><div class="graphic-heading"><span class="graphic-kicker">END TIMES</span><h3>The prophetic sequence</h3><p>A simplified visual timeline reflecting the order described in Lessons 11 and 12.</p></div><div class="flow-steps compact-flow">${items.map(item=>`<article><h4>${item}</h4></article>`).join('<span class="flow-arrow">→</span>')}</div></section>`;
+}
+
+function renderMarriageSupperGraphic() {
+  const items = [['Bride','The Church'],['Bridegroom','Jesus Christ'],['Celebration','Marriage supper of the Lamb'],['Hope','A future union with Christ']];
+  return `<section class="info-graphic supper-graphic"><div class="graphic-heading"><span class="graphic-kicker">REVELATION 19</span><h3>Marriage Supper of the Lamb</h3><p>An easy visual snapshot of this hopeful future event.</p></div><div class="feature-grid">${items.map(([t,d])=>`<article><h4>${t}</h4><p>${d}</p></article>`).join('')}</div></section>`;
+}
+
+function sectionGraphic(section, lesson) {
+  const title = (section.title || '').toLowerCase();
+  if (title === 'arrangement of the bible') return renderBibleArrangementGraphic();
+  if (title.includes('what creation teaches us') || title.includes('creation of man')) return renderCreationGraphic();
+  if (title === 'noah') return renderNoahGraphic();
+  if (title.includes('jacob/israel') || title.includes('abraham') || title.includes('isaac') || title.includes('joseph')) return renderPatriarchGraphic();
+  if (title.includes('passover') || title === 'judgement on egypt' || title === 'exodus') return renderPassoverGraphic();
+  if (title.includes('tabernacle')) return renderTabernacleGraphic();
+  if (title.includes('birth of jesus') || title.includes('death, burial and resurrection')) return renderJesusGraphic();
+  if (title.includes('plan of salvation') || title.includes('true biblical faith consist')) return renderPlanOfSalvationGraphic();
+  if (title.includes('holy spirit') || title.includes('recap on the plan of salvation')) return renderHolySpiritGraphic();
+  if (title.includes('apostles doctrine')) return renderApostlesDoctrineGraphic();
+  if (title === 'the rapture' || title.includes('signs of the end')) return renderEndTimesTimelineGraphic();
+  if (title === 'the great tribulation') return renderTribulationJudgmentsGraphic();
+  if (title.includes('marriage supper')) return renderMarriageSupperGraphic();
+  if (title === 'millennium kingdom of god') return renderMillenniumGraphic();
+  if (title === 'eternity') return renderGenesisRevelationGraphic();
   return '';
 }
 
-function renderBlocksWithLayouts(section) {
+function renderBlocksWithLayouts(section, lesson) {
   if (section.title === 'Visual Aids & Chart Content') return renderAppendixBlocks(section);
   const blocks = section.blocks || [];
   const parts = [];
-  const graphic = sectionGraphic(section);
+  const graphic = sectionGraphic(section, lesson);
   if (graphic) parts.push(graphic);
   for (let i = 0; i < blocks.length; i += 1) {
     const block = blocks[i];
@@ -2027,7 +2421,7 @@ function renderBlock(block, compact = false) {
   }
 }
 
-function renderSection(section, index) {
+function renderSection(section, index, lesson) {
   const id = `section-${slugify(section.title)}-${index}`;
   const appendix = section.title === 'Visual Aids & Chart Content';
   return `
@@ -2038,7 +2432,7 @@ function renderSection(section, index) {
       </header>
       <div class="transcript-body">
         ${appendix ? '<p class="appendix-note">This area preserves text extracted from the source material’s visual charts and supplementary slides. It is kept separate so the main lesson stays easy to read.</p>' : ''}
-        ${renderBlocksWithLayouts(section)}
+        ${renderBlocksWithLayouts(section, lesson)}
       </div>
     </article>`;
 }
@@ -2053,22 +2447,78 @@ function renderTranscript(lesson, transcript) {
   }).join('');
 
   els.content.innerHTML = `
-    <div class="transcript-toolbar">
-      <div><p class="eyebrow">FULL TRANSCRIPT</p><h2>Read the complete lesson</h2></div>
-      <label class="transcript-search"><span>⌕</span><input id="transcriptSearch" type="search" placeholder="Search this lesson" /></label>
+    <div class="transcript-toolbar presentation-topbar">
+      <div><p class="eyebrow">PRESENTATION VIEW</p><h2>Study as guided slides</h2><p class="presentation-caption">Large, clean slides make the lesson easier to follow and present.</p></div>
+      <div class="presentation-actions">
+        <label class="transcript-search"><span>⌕</span><input id="transcriptSearch" type="search" placeholder="Search this lesson" /></label>
+        <div class="slide-controls">
+          <button class="icon-btn" id="prevSlideBtn" aria-label="Previous slide">←</button>
+          <span class="slide-counter" id="slideCounter">1 / 1</span>
+          <button class="icon-btn" id="nextSlideBtn" aria-label="Next slide">→</button>
+        </div>
+      </div>
     </div>
-    <div class="transcript-status" id="transcriptStatus">${contentSections.length} clean lesson sections · no page-by-page view</div>
-    <div id="transcriptSections">${contentSections.map(renderSection).join('')}</div>
-    ${renderQuiz(lesson)}
-    ${renderReflection(lesson)}`;
+    <div class="transcript-status" id="transcriptStatus">${contentSections.length + 2} presentation slides in this lesson</div>
+    <div id="presentationDeck" class="presentation-deck">
+      ${contentSections.map((section,index) => `<div class="deck-slide" data-search="${escapeHTML(sectionPlainText(section).toLowerCase())}" data-slide-label="${escapeHTML(section.title)}">${renderSection(section,index,lesson)}</div>`).join('')}
+      <div class="deck-slide deck-slide-meta" data-search="quick review ${escapeHTML(lesson.quiz.q.toLowerCase())}" data-slide-label="Quick Review">${renderQuiz(lesson)}</div>
+      <div class="deck-slide deck-slide-meta" data-search="reflection notes ${escapeHTML(lesson.reflection.toLowerCase())}" data-slide-label="Reflection">${renderReflection(lesson)}</div>
+    </div>`;
 
+  currentSlideIndex = 0;
   els.sectionNav.querySelectorAll('[data-target]').forEach(button => button.addEventListener('click', () => {
-    document.getElementById(button.dataset.target)?.scrollIntoView({behavior:'smooth',block:'start'});
+    const slides = [...document.querySelectorAll('.deck-slide')];
+    const targetIndex = slides.findIndex(slide => slide.querySelector(`#${button.dataset.target}`));
+    if (targetIndex >= 0) showSlide(targetIndex);
   }));
   document.getElementById('transcriptSearch')?.addEventListener('input', event => filterTranscript(event.target.value));
+  document.getElementById('prevSlideBtn')?.addEventListener('click', () => moveSlide(-1));
+  document.getElementById('nextSlideBtn')?.addEventListener('click', () => moveSlide(1));
   document.querySelectorAll('.open-verse').forEach(button => button.addEventListener('click', () => openReference(button.dataset.ref)));
+  bindPresentationKeys();
   bindQuiz(lesson);
   bindNotes(lesson);
+  showSlide(0);
+}
+
+function getSlides() {
+  return [...document.querySelectorAll('.deck-slide')].filter(slide => !slide.hidden);
+}
+
+function moveSlide(step) {
+  const slides = getSlides();
+  if (!slides.length) return;
+  const next = Math.max(0, Math.min(slides.length - 1, currentSlideIndex + step));
+  showSlide(next);
+}
+
+function showSlide(index) {
+  const slides = getSlides();
+  if (!slides.length) return;
+  currentSlideIndex = Math.max(0, Math.min(slides.length - 1, index));
+  slides.forEach((slide, idx) => slide.classList.toggle('active', idx === currentSlideIndex));
+  const current = slides[currentSlideIndex];
+  current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('slideCounter').textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+  const prev = document.getElementById('prevSlideBtn');
+  const next = document.getElementById('nextSlideBtn');
+  if (prev) prev.disabled = currentSlideIndex === 0;
+  if (next) next.disabled = currentSlideIndex === slides.length - 1;
+
+  const currentSection = current?.querySelector('.transcript-section');
+  const activeId = currentSection?.id;
+  els.sectionNav.querySelectorAll('.section-chip').forEach(button => {
+    button.classList.toggle('active', activeId ? button.dataset.target === activeId : false);
+  });
+}
+
+function bindPresentationKeys() {
+  document.onkeydown = (event) => {
+    const tag = (event.target?.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    if (event.key === 'ArrowRight') moveSlide(1);
+    if (event.key === 'ArrowLeft') moveSlide(-1);
+  };
 }
 
 function renderQuiz(lesson) {
@@ -2122,15 +2572,17 @@ function bindNotes(lesson) {
 
 function filterTranscript(query='') {
   const needle = query.trim().toLowerCase();
-  const sections = [...document.querySelectorAll('.transcript-section')];
+  const slides = [...document.querySelectorAll('.deck-slide')];
   let shown = 0;
-  sections.forEach(section => {
-    const match = !needle || section.dataset.sectionSearch.includes(needle);
-    section.hidden = !match;
+  slides.forEach(slide => {
+    const match = !needle || (slide.dataset.search || '').includes(needle);
+    slide.hidden = !match;
     if (match) shown++;
   });
+  currentSlideIndex = 0;
+  showSlide(0);
   const status = document.getElementById('transcriptStatus');
-  if (status) status.textContent = needle ? `${shown} section${shown===1?'':'s'} matched “${query}”` : `${sections.length} clean lesson sections · no page-by-page view`;
+  if (status) status.textContent = needle ? `${shown} slide${shown===1?'':'s'} matched “${query}”` : `${slides.length} presentation slides in this lesson`;
 }
 
 function renderEnd(lesson) {
